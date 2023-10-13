@@ -61,7 +61,7 @@ function updateProduct(newProduct: Omit<Product, 'id' | 'purchased'>){
         createdAt: props.product.createdAt,
         purchased: props.product.purchased
     }
-    
+    store.updateProduct(editedProduct)
 }
 const store = useProductStore();
 </script>

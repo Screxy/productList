@@ -63,7 +63,12 @@ export const useProductStore = defineStore('product', () => {
     products.value = products.value.filter((product) => product.id != id);
   }
   function updateProduct(product: Product){
-    
+        const indexToUpdate = products.value.findIndex(
+          (elem) => elem.id === product.id
+        );
+        if (indexToUpdate !== -1) {
+          products.value[indexToUpdate] = product;
+        }
   }
   function incrementProductCount(id: number) {
     products.value.forEach((product: Product) => {
@@ -108,5 +113,6 @@ export const useProductStore = defineStore('product', () => {
     deleteProduct,
     togglePurchased,
     decrementProductCount,
+    updateProduct,
   };
 });

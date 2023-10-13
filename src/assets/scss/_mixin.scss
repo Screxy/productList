@@ -1,0 +1,94 @@
+@use 'function' as *;
+@use 'variables' as *;
+
+@mixin wrapper($display: flex, $maxwidth: 37rem) {
+  display: $display;
+  max-width: $maxwidth;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 2rem;
+  @include media(min, xs) {
+    max-width: 39rem;
+    padding: 0 2rem;
+  }
+  @include media(min, sm) {
+    max-width: 57.6rem;
+    padding: 0 2rem;
+  }
+  @include media(min, md) {
+    max-width: 76.8rem;
+    padding: 0 2rem;
+  }
+}
+
+@mixin title() {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: color(primaryTitleColor);
+  text-align: center;
+  @include media(min,sm){
+    font-size: 3rem;
+  }
+  @include media(min, md) {
+    font-size: 3.6rem;
+  }
+  @include media(min,xl){
+    font-size: 4.2rem;
+  }
+}
+@mixin subTitle() {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  color: color(subtitleColor);
+  @include media(min, sm) {
+    font-size: 2rem;
+  }
+  @media (min-width: 1200px) {
+    font-size: 2.2rem;
+    line-height: 4.4rem;
+  }
+}
+
+@mixin secondTitle() {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: color(secondTitleColor);
+}
+
+@mixin desc() {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+  color: color(primaryDescColor);
+}
+@mixin footerTitle() {
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  color: color(secondDescColor);
+}
+@mixin footerText() {
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: color(footerTextColor);
+  &:hover {
+    color: color(primaryTitleColor);
+  }
+}
+@mixin footerCopy() {
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: color(footerTextColor);
+}
+@mixin media($minmax, $media) {
+  @each $size, $resolution in $sizes {
+    @if $media == $size {
+      @media only screen and (#{$minmax}-width: $resolution) {
+        @content;
+      }
+    }
+  }
+}

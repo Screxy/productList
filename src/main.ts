@@ -4,9 +4,9 @@ import { createClient } from '@supabase/supabase-js';
 import components from '@/components/UI';
 import App from './App.vue'
 import router from './router'
-const supabase = createClient(
-  import.meta.env.VITE_VUE_APP_SUPABASE_URL as string,
-  import.meta.env.VITE_VUE_APP_SUPABASE_KEY as string
+export const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_KEY
 );
 
 const app = createApp(App)

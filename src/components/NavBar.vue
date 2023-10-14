@@ -15,6 +15,12 @@
             <li class="navigation__item">
                 <router-link to="/About" class="navigation__link">О проекте</router-link>
             </li>
+            <li class="navigation__item">
+                <router-link to="/login" class="navigation__link">Войти</router-link>
+            </li>
+            <li class="navigation__item">
+                <router-link to="/signup" class="navigation__link">Зарегестрироваться</router-link>
+            </li>
         </ul>
     </nav>
 </template>

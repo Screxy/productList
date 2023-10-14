@@ -3,7 +3,7 @@
     <span class="label__span">
       {{ label }}
     </span>
-    <input :value="modelValue" @input="updateInput" class="label__input" :type="type" :placeholder="placeholder" />
+    <input :value="modelValue" @input="updateInput" class="label__input" :type="type" :placeholder="placeholder" autocomplete="off"/>
   </label>
 </template>
 <script lang="ts" setup>

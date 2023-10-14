@@ -15,11 +15,14 @@
             <li class="navigation__item">
                 <router-link to="/About" class="navigation__link">О проекте</router-link>
             </li>
-            <li class="navigation__item">
+            <li class="navigation__item" v-if="!store.isAuthenticated">
                 <router-link to="/login" class="navigation__link">Войти</router-link>
             </li>
-            <li class="navigation__item">
+            <li class="navigation__item" v-if="!store.isAuthenticated">
                 <router-link to="/signup" class="navigation__link">Зарегестрироваться</router-link>
+            </li>
+            <li class="navigation__item" v-if="store.isAuthenticated">
+                <VButton @click="tryLogout">Выйти</VButton>
             </li>
         </ul>
     </nav>
@@ -27,7 +30,13 @@
 
 <script lang="ts" setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue'
-
+import { useAuthStore } from '@/stores/auth';
+import router from '@/router';
+const store = useAuthStore();
+async function tryLogout() {
+    const error = await store.logout()
+    if (!error) router.push("login")
+}
 const screenWidth = ref(window.innerWidth)
 const burgerVisible = ref(false)
 const desktop = ref(false)

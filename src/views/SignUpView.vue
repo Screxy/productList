@@ -8,31 +8,18 @@
 </template>
 
 <script setup lang="ts">
-import { supabase } from '@/main'
 import SignUpForm from '@/components/auth/SignUpForm.vue'
 import { ref } from 'vue';
-
-export type newUser = {
-    name: string,
-    email: string,
-    password: string
-}
+import { useAuthStore, type NewUser } from '@/stores/auth';
+import router from '@/router';
+const store = useAuthStore()
 const loading = ref(false)
-async function trySignUp(newUserData: newUser) {
+async function trySignUp(newUserData: NewUser) {
     loading.value = true
-    const { data, error } = await supabase.auth.signUp(
-        {
-            email: newUserData.email,
-            password: newUserData.password,
-            options: {
-                data: {
-                    name: newUserData.name,
-                }
-            }
-        }
-    )
+    const { data, error } = await store.signUp(newUserData)
     console.log(data, error);
     loading.value = false
+    if (store.isAuthenticated) router.push('/')
 }
 </script>
 

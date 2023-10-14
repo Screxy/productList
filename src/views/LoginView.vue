@@ -9,23 +9,18 @@
 
 <script setup lang="ts">
 import AuthForm from '@/components/auth/AuthForm.vue'
-import { supabase } from '@/main';
 import { ref } from 'vue';
 import router from '@/router';
+import { useAuthStore, type User } from '@/stores/auth';
 const loading = ref(false)
-export type User = {
-    email: string,
-    password: string
-}
+const store = useAuthStore()
 async function tryLogin(userData: User) {
     loading.value = true
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email: userData.email,
-        password: userData.password,
-    })
-    console.log(data, error);
+    const { data, error } = await store.login(userData)
     loading.value = false
-    if (data.session) router.push('/')
+    console.log(data);
+    console.log(error);
+    if(store.isAuthenticated) router.push('/') 
 }
 </script>
 

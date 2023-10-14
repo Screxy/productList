@@ -26,7 +26,7 @@ const screenWidth = ref(window.innerWidth)
 const burgerVisible = ref(false)
 const desktop = ref(false)
 function handleResize() {
-    screenWidth.value > 1200
+    screenWidth.value > 768
         ? ((desktop.value = true), (burgerVisible.value = true))
         : ((desktop.value = false), (burgerVisible.value = false));
     screenWidth.value = window.innerWidth;
@@ -35,14 +35,14 @@ function toogleMenu() {
     burgerVisible.value = !burgerVisible.value;
 }
 function isDesktop() {
-    screenWidth.value > 1200
+    screenWidth.value > 768
         ? ((desktop.value = true), (burgerVisible.value = true))
         : ((desktop.value = false), (burgerVisible.value = false));
 }
 
 watch(screenWidth, isDesktop)
 onMounted(() => {
-    screenWidth.value > 1200 ? (desktop.value = true) : (desktop.value = false);
+    screenWidth.value > 768 ? (desktop.value = true) : (desktop.value = false);
     window.addEventListener('resize', handleResize);
 })
 
@@ -78,13 +78,13 @@ onUnmounted(() => {
     backdrop-filter: blur(1rem);
     -webkit-backdrop-filter: blur(1rem);
 
-    @include media(min, xl) {
+    @include media(min, md) {
         display: flex;
         position: static;
         margin-top: 0;
         padding: 0;
         border: none;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
         height: auto;
     }

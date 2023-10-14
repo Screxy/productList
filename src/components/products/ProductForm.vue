@@ -5,7 +5,7 @@
         <VInput v-model.number="product.price" type="number" class="form__input" placeholder="Цена" label="Введите цену" />
         <span class="form__error" v-for="error in v$.price.$errors" :key="error.$uid">{{ error.$message }}</span>
 
-        <VInput v-model.number="product.count" type="text" class="form__input" placeholder="Количество"
+        <VInput v-model.number="product.count" type="number" class="form__input" placeholder="Количество"
             label="Введите количество" />
         <span class="form__error" v-for="error in v$.count.$errors" :key="error.$uid">{{ error.$message }} </span>
 
@@ -42,7 +42,7 @@ const rules = computed(() => {
         name:
         {
             required: helpers.withMessage('Поле обязательное для заполнения', required),
-            minLength: helpers.withMessage(`Название не может быть короче ${minLength(4).$params.min} символов`, minLength(4))
+            minLength: helpers.withMessage(`Название не может быть короче ${minLength(3).$params.min} символов`, minLength(3))
         },
         price:
         {

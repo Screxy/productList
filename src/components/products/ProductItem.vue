@@ -13,16 +13,16 @@
 
         </div>
         <div class="item__buttons">
-            <VButton class="item__button" @click="store.incrementProductCount(product.id)">
+            <VButton :disabled="formVisible" class="item__button" @click="store.incrementProductCount(product.id)">
                 +
             </VButton>
-            <VButton class="item__button" @click="store.decrementProductCount(product.id)">
+            <VButton :disabled="formVisible" class="item__button" @click="store.decrementProductCount(product.id)">
                 -
             </VButton>
-            <VButton class="item__button" @click="store.deleteProduct(product.id)">
+            <VButton :disabled="formVisible" class="item__button" @click="store.deleteProduct(product.id)">
                 Удалить
             </VButton>
-            <VButton class=" item__button item__cart-button" @click="store.togglePurchased(product.id)">
+            <VButton :disabled="formVisible" class=" item__button item__cart-button" @click="store.togglePurchased(product.id)">
                 <PurchasedIcon class="item__svg" :class="{ item__svg_active: product.purchased }" />
             </VButton>
             <VButton class="item__button item__cart-button" @click="formVisible = !formVisible" >

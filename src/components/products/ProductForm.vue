@@ -57,11 +57,10 @@ const props = withDefaults(defineProps<Props>(), {
   price: 0,
   count: 0,
 })
-const product = reactive<Omit<Product, 'id' | 'purchased'>>({
+const product = reactive<Omit<Product, 'id' | 'purchased' | 'created_at'>>({
   name: props.name,
   price: props.price,
   count: props.count,
-  createdAt: new Date(Date.now()).toISOString(),
 })
 const rules = computed(() => {
   return {

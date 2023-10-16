@@ -7,7 +7,7 @@
       <p class="item__price">{{ product.price }} руб.</p>
       <p class="item__count">x{{ product.count }}</p>
     </div>
-    <div class="item__buttons">
+    <div class="item__buttons" v-if="authStore.isAuthenticated">
       <VButton
         :disabled="formVisible"
         class="item__button"
@@ -53,7 +53,7 @@
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric',
-          }).format(new Date(product.createdAt))
+          }).format(new Date(product.created_at))
         }}
       </p>
     </div>
@@ -74,6 +74,8 @@ import ProductForm from '@/components/products/ProductForm.vue'
 import PurchasedIcon from './icons/PurchasedIcon.vue'
 import EditIcon from './icons/EditIcon.vue'
 import { ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+const authStore = useAuthStore()
 const props = defineProps<{ product: Product }>()
 const formVisible = ref(false)
 function updateProduct(newProduct: Omit<Product, 'id' | 'purchased'>) {
@@ -83,7 +85,7 @@ function updateProduct(newProduct: Omit<Product, 'id' | 'purchased'>) {
     name: newProduct.name,
     price: newProduct.price,
     count: newProduct.count,
-    createdAt: props.product.createdAt,
+    created_at: props.product.created_at,
     purchased: props.product.purchased,
   }
   store.updateProduct(editedProduct)

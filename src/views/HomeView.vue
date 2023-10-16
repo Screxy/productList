@@ -50,7 +50,7 @@ import ProductForm from '@/components/products/ProductForm.vue'
 import ProductList from '@/components/products/ProductList.vue'
 import { useProductStore } from '@/stores/products'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const dialogVisible = ref(false)
 const store = useProductStore()
@@ -59,6 +59,7 @@ function showDialog() {
   dialogVisible.value = true
 }
 const filter = ref('all')
+store.fetchProducts()
 </script>
 
 <style lang="scss">

@@ -7,33 +7,23 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { useCounterStore } from '@/stores/counter'
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup(){
-    const counter = useCounterStore();
-    const errors = ref('')
-    function decrement(){
-      if (counter.count > 0) {
-        counter.decrement();
-        errors.value = ''
-        return
-      }
-      errors.value = 'Счетчик уже на нуле!'
-    }
-    function increment(){
-      counter.increment()
-      errors.value = ''
-    }
-    return {
-      counter,
-      decrement,
-      errors,
-      increment
-    }
+import { defineComponent, ref } from 'vue'
+const counter = useCounterStore()
+const errors = ref('')
+function decrement() {
+  if (counter.count > 0) {
+    counter.decrement()
+    errors.value = ''
+    return
   }
-})
+  errors.value = 'Счетчик уже на нуле!'
+}
+function increment() {
+  counter.increment()
+  errors.value = ''
+}
 </script>
 
 <style>

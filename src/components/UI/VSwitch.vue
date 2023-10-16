@@ -3,7 +3,7 @@
     <span class="visually-hidden">Переключатель</span>
     <input
       type="checkbox"
-      :checked="checked"
+      :checked="modelValue"
       @input="updateCheck"
       class="visually-hidden"
     />
@@ -11,18 +11,18 @@
   </label>
 </template>
 
-<script lang="ts">
-export default {
+<script setup lang="ts">
+defineOptions({
   name: 'VSwitch',
-  props: {
-    checked: Boolean,
-  },
-  methods: {
-    updateCheck() {
-      this.$emit('check');
-    },
-  },
-};
+})
+const props = defineProps<{
+  modelValue: boolean
+}>()
+
+const emit = defineEmits(['update:modelValue'])
+function updateCheck() {
+  emit('update:modelValue', !props.modelValue)
+}
 </script>
 
 <style scoped lang="scss">

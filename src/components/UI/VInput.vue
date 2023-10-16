@@ -3,22 +3,29 @@
     <span class="label__span">
       {{ label }}
     </span>
-    <input :value="modelValue" @input="updateInput" class="label__input" :type="type" :placeholder="placeholder" autocomplete="off"/>
+    <input
+      :value="modelValue"
+      @input="updateInput"
+      class="label__input"
+      :type="type"
+      :placeholder="placeholder"
+      autocomplete="off"
+    />
   </label>
 </template>
 <script lang="ts" setup>
-defineOptions( {
+defineOptions({
   name: 'VInput',
 })
 const props = defineProps<{
-  placeholder: string,
-  modelValue: string | number,
-  label: string,
+  placeholder: string
+  modelValue: string | number
+  label: string
   type?: string
 }>()
 const emit = defineEmits(['update:modelValue'])
 function updateInput(event: any) {
-  emit('update:modelValue', event.target.value);
+  emit('update:modelValue', event.target.value)
 }
 </script>
 
@@ -32,7 +39,7 @@ function updateInput(event: any) {
   width: 100%;
   border: 2px solid color(primaryTitleColor);
   padding: 10px 15px;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 
   &:focus {
     box-shadow: 0px 0px 7px 3px #757575;
@@ -40,6 +47,6 @@ function updateInput(event: any) {
 }
 
 .label__span {
-  @include secondTitle()
+  @include secondTitle();
 }
 </style>

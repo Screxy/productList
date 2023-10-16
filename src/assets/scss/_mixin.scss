@@ -26,13 +26,13 @@
   font-weight: 700;
   color: color(primaryTitleColor);
   text-align: center;
-  @include media(min,sm){
+  @include media(min, sm) {
     font-size: 3rem;
   }
   @include media(min, md) {
     font-size: 3.6rem;
   }
-  @include media(min,xl){
+  @include media(min, xl) {
     font-size: 4.2rem;
   }
 }

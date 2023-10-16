@@ -1,19 +1,19 @@
-import { ref, computed, watch } from 'vue';
-import { defineStore } from 'pinia';
-import axios from 'axios';
+import { ref, computed, watch } from 'vue'
+import { defineStore } from 'pinia'
+import axios from 'axios'
 export type Product = {
-  id: number;
-  price: number;
-  name: string;
-  count: number;
-  createdAt: string;
-  purchased: boolean;
-};
+  id: number
+  price: number
+  name: string
+  count: number
+  createdAt: string
+  purchased: boolean
+}
 export const useProductStore = defineStore('product', () => {
-  const products = ref<Product[]>([]);
-  const productsInLocalStorage = localStorage.getItem('products');
+  const products = ref<Product[]>([])
+  const productsInLocalStorage = localStorage.getItem('products')
   if (productsInLocalStorage) {
-    products.value = JSON.parse(productsInLocalStorage);
+    products.value = JSON.parse(productsInLocalStorage)
   }
   if (products.value.length === 0) {
     products.value = [
@@ -41,69 +41,69 @@ export const useProductStore = defineStore('product', () => {
         purchased: true,
         createdAt: '2023-06-03T12:42:22.398Z',
       },
-    ];
+    ]
   }
   const purchasedProducts = computed(() =>
     products.value.filter((product) => product.purchased)
-  );
+  )
 
   function addProduct(newProduct: Omit<Product, 'id'>) {
-    let newId = 1;
+    let newId = 1
     if (products.value.length > 0) {
-      newId = products.value[products.value.length - 1].id + 1;
+      newId = products.value[products.value.length - 1].id + 1
     }
     const product: Product = {
       id: newId,
       ...newProduct,
       purchased: false,
-    };
-    products.value.push(product);
+    }
+    products.value.push(product)
   }
   function deleteProduct(id: number) {
-    products.value = products.value.filter((product) => product.id != id);
+    products.value = products.value.filter((product) => product.id != id)
   }
-  function updateProduct(product: Product){
-        const indexToUpdate = products.value.findIndex(
-          (elem) => elem.id === product.id
-        );
-        if (indexToUpdate !== -1) {
-          products.value[indexToUpdate] = product;
-        }
+  function updateProduct(product: Product) {
+    const indexToUpdate = products.value.findIndex(
+      (elem) => elem.id === product.id
+    )
+    if (indexToUpdate !== -1) {
+      products.value[indexToUpdate] = product
+    }
   }
   function incrementProductCount(id: number) {
     products.value.forEach((product: Product) => {
-      if (product.id === id) product.count++;
-    });
+      if (product.id === id) product.count++
+    })
   }
   function decrementProductCount(id: number) {
     products.value.forEach((product) => {
       if (product.id === id) {
-        if (product.count > 1) return product.count--;
-        deleteProduct(product.id);
+        if (product.count > 1) return product.count--
+        deleteProduct(product.id)
       }
-    });
+    })
   }
 
   function togglePurchased(id: number) {
     products.value.forEach((product) => {
-      if (product.id === id) product.purchased = !product.purchased;
-    });
+      if (product.id === id) product.purchased = !product.purchased
+    })
   }
   async function fetchProducts() {
     try {
-      const response = await axios.get('');
-      products.value.push(...response.data.reverse());
+      const response = await axios.get('')
+      products.value.push(...response.data.reverse())
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
   watch(
     products,
     (state: Product[]) => {
-      localStorage.setItem('products', JSON.stringify(state));
+      localStorage.setItem('products', JSON.stringify(state))
     },
     { deep: true }
-  );
+  )
   return {
     products,
     purchasedProducts,
@@ -114,5 +114,5 @@ export const useProductStore = defineStore('product', () => {
     togglePurchased,
     decrementProductCount,
     updateProduct,
-  };
-});
+  }
+})

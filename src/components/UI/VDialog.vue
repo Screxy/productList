@@ -6,21 +6,18 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
+<script setup lang="ts">
+defineOptions({
   name: 'VDialog',
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  methods: {
-    hideDialog() {
-      this.$emit('update:show', false);
-    },
-  },
-};
+})
+const props = defineProps<{
+  show: boolean
+}>()
+
+const emit = defineEmits(['update:show'])
+function hideDialog() {
+  emit('update:show', false)
+}
 </script>
 
 <style scoped>

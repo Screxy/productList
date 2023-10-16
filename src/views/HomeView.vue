@@ -14,18 +14,28 @@
         Добавить продукт
       </VButton>
       <VDialog v-model:show="dialogVisible">
-        <ProductForm @submit-form="(product) => {
-          store.addProduct(product)
-          dialogVisible = false
-        }" />
+        <ProductForm
+          @submit-form="
+            (product) => {
+              store.addProduct(product)
+              dialogVisible = false
+            }
+          "
+        />
       </VDialog>
       <nav class="products__filter">
-        <VButton class="products__filter-button" @click="filter = 'all'"
-          :class="{ 'products__filter-button_checked': filter === 'all' }">
+        <VButton
+          class="products__filter-button"
+          @click="filter = 'all'"
+          :class="{ 'products__filter-button_checked': filter === 'all' }"
+        >
           Все
         </VButton>
-        <VButton class="products__filter-button" @click="filter = 'purchased'"
-          :class="{ 'products__filter-button_checked': filter === 'purchased' }">
+        <VButton
+          class="products__filter-button"
+          @click="filter = 'purchased'"
+          :class="{ 'products__filter-button_checked': filter === 'purchased' }"
+        >
           Купленные
         </VButton>
       </nav>
@@ -35,21 +45,20 @@
 </template>
 
 <script lang="ts" setup>
-import VDialog from '@/components/UI/VDialog.vue';
-import ProductForm from '@/components/products/ProductForm.vue';
-import ProductList from '@/components/products/ProductList.vue';
-import { useProductStore } from '@/stores/products';
-import { storeToRefs } from 'pinia';
-import { ref, computed } from 'vue'
+import VDialog from '@/components/UI/VDialog.vue'
+import ProductForm from '@/components/products/ProductForm.vue'
+import ProductList from '@/components/products/ProductList.vue'
+import { useProductStore } from '@/stores/products'
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 
 const dialogVisible = ref(false)
-const store = useProductStore();
-const { products, purchasedProducts } = storeToRefs(store);
+const store = useProductStore()
+const { products, purchasedProducts } = storeToRefs(store)
 function showDialog() {
-  dialogVisible.value = true;
+  dialogVisible.value = true
 }
 const filter = ref('all')
-
 </script>
 
 <style lang="scss">
@@ -76,14 +85,14 @@ const filter = ref('all')
 
 .products__filter {
   margin-top: 1.5rem;
-  
+
   .products__filter-button_checked {
     background-color: #008167;
     border-color: #008167;
   }
 }
 
-.products__filter-button+.products__filter-button {
+.products__filter-button + .products__filter-button {
   margin-left: 1.5rem;
 }
 </style>

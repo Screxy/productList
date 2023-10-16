@@ -4,10 +4,10 @@
   </button>
 </template>
 
-<script lang="ts">
-export default {
+<script setup lang="ts">
+defineOptions({
   name: 'VButton',
-};
+})
 </script>
 
 <style scoped lang="scss">
@@ -34,13 +34,12 @@ export default {
   &[disabled] {
     transform: scale(0.9);
     opacity: 0.5;
-    &:hover{
+    &:hover {
       box-shadow: none;
     }
-    &:active{
+    &:active {
       background-color: color(primaryTitleColor);
     }
-    
   }
 }
 </style>

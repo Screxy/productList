@@ -28,6 +28,6 @@ const router = createRouter({
       component: () => import('../views/SignUpView.vue'),
     },
   ],
-});
+})
 
 export default router

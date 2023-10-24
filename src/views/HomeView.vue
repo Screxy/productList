@@ -44,6 +44,7 @@
           Купленные
         </VButton>
       </nav>
+      <VInput class="products__search" label="Поиск" v-model="search" />
       <ProductList :filter="filter" />
     </div>
   </section>
@@ -53,19 +54,23 @@
 import VDialog from '@/components/UI/VDialog.vue'
 import ProductForm from '@/components/products/ProductForm.vue'
 import ProductList from '@/components/products/ProductList.vue'
+import { computed, ref } from 'vue'
 import { useProductStore } from '@/stores/products'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
-const dialogVisible = ref(false)
+
 const authStore = useAuthStore()
 const store = useProductStore()
-const { products, purchasedProducts } = storeToRefs(store)
+const { products, purchasedProducts, search, searchProducts } =
+  storeToRefs(store)
+store.fetchProducts()
+
+const dialogVisible = ref(false)
 function showDialog() {
   dialogVisible.value = true
 }
+
 const filter = ref('all')
-store.fetchProducts()
 </script>
 
 <style lang="scss">
@@ -82,6 +87,7 @@ store.fetchProducts()
 }
 
 .products__text {
+  margin-top: 1.5rem;
   @include subTitle();
 }
 
@@ -100,5 +106,9 @@ store.fetchProducts()
 
 .products__filter-button + .products__filter-button {
   margin-left: 1.5rem;
+}
+
+.products__search {
+  margin-top: 1.5rem;
 }
 </style>

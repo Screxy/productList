@@ -1,6 +1,6 @@
 <template>
   <ul class="list" v-if="filter === 'all'">
-    <ProductItem v-for="product in store.products" :product="product" />
+    <ProductItem v-for="product in store.searchProducts" :product="product" />
   </ul>
   <ul class="list" v-else-if="filter === 'purchased'">
     <ProductItem

@@ -45,9 +45,16 @@ export const useProductStore = defineStore('product', () => {
   //   ]
   // }
   const purchasedProducts = computed(() =>
-    products.value.filter((product) => product.purchased)
+    searchProducts.value.filter((product) => product.purchased)
   )
-
+  const search = ref('')
+  const searchProducts = computed(() => {
+    return products.value.filter((product) =>
+      product.name
+        .toLocaleLowerCase()
+        .includes(search.value.toLocaleLowerCase())
+    )
+  })
   async function addProduct(newProduct: Omit<Product, 'id' | 'created_at'>) {
     const product: Omit<Product, 'id' | 'created_at'> = {
       ...newProduct,
@@ -146,6 +153,8 @@ export const useProductStore = defineStore('product', () => {
   // )
   return {
     products,
+    search,
+    searchProducts,
     purchasedProducts,
     fetchProducts,
     addProduct,

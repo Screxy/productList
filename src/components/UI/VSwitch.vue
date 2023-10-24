@@ -26,7 +26,6 @@ function updateCheck() {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/scss/function' as *;
 @use '@/assets/scss/variables' as *;
 @use '@/assets/scss/mixin' as *;
 .switch {
@@ -56,11 +55,11 @@ function updateCheck() {
 }
 
 input:checked + .switch {
-  background-color: color(primaryTitleColor);
+  background-color: $c-brand;
 }
 
 input:focus + .switch {
-  box-shadow: 0 0 1px 2px color(primaryTitleColor);
+  box-shadow: 0 0 1px 2px $c-brand;
 }
 
 input:checked + .switch:before {

@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
     if (data.session != null) return (isAuthenticated.value = true)
     return (isAuthenticated.value = false)
   }
-  onMounted(authCheck)
+  authCheck()
   async function login(userData: User) {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: userData.email,
@@ -57,5 +57,13 @@ export const useAuthStore = defineStore('auth', () => {
 
     return error
   }
-  return { isAuthenticated, currentUser, currentSession, login, signUp, logout, authCheck}
+  return {
+    isAuthenticated,
+    currentUser,
+    currentSession,
+    login,
+    signUp,
+    logout,
+    authCheck,
+  }
 })

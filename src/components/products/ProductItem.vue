@@ -94,15 +94,15 @@ const store = useProductStore()
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/scss/function' as *;
 @use '@/assets/scss/mixin' as *;
+@use '@/assets/scss/variables' as *;
 
 .item {
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
   padding: 1rem;
-  background-color: color(primaryDescColor);
+  background-color: $c-secondTextColor;
   border-radius: 15px;
 }
 

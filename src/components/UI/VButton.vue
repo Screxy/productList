@@ -11,15 +11,14 @@ defineOptions({
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/scss/function' as *;
 @use '@/assets/scss/variables' as *;
 @use '@/assets/scss/mixin' as *;
 
 .button {
   padding: 10px;
-  color: color(secondDescColor);
-  background-color: color(primaryTitleColor);
-  border: 1px solid color(primaryTitleColor);
+  color: $c-primaryTextColor;
+  background-color: $c-brand;
+  border: 1px solid $c-brand;
   border-radius: 30px;
   transition: all 0.3s ease;
   @include media(min, md) {
@@ -38,7 +37,7 @@ defineOptions({
       box-shadow: none;
     }
     &:active {
-      background-color: color(primaryTitleColor);
+      background-color: $c-brand;
     }
   }
 }

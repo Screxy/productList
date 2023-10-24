@@ -106,7 +106,6 @@ async function onSubmitForm() {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/scss/function' as *;
 @use '@/assets/scss/variables' as *;
 @use '@/assets/scss/mixin' as *;
 

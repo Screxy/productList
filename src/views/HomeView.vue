@@ -56,8 +56,7 @@ import ProductList from '@/components/products/ProductList.vue'
 import { useProductStore } from '@/stores/products'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
-import { onMounted, ref } from 'vue'
-
+import { ref } from 'vue'
 const dialogVisible = ref(false)
 const authStore = useAuthStore()
 const store = useProductStore()
@@ -71,7 +70,6 @@ store.fetchProducts()
 
 <style lang="scss">
 @use '@/assets/scss/mixin' as *;
-@use '@/assets/scss/function' as *;
 @use '@/assets/scss/variables' as *;
 
 .products__wrapper {

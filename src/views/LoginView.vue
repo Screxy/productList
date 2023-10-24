@@ -1,15 +1,11 @@
 <template>
-  <section class="login">
-    <div class="login__wrapper">
-      <Spinner v-if="loading">загрузка</Spinner>
-      <AuthForm @submit-form="tryLogin" class="login__form" />
-    </div>
-  </section>
+  <Spinner v-if="loading">загрузка</Spinner>
+  <AuthForm @submit-form="tryLogin" class="login__form" />
 </template>
 
 <script setup lang="ts">
 import AuthForm from '@/components/auth/AuthForm.vue'
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/Spinner.vue'
 import { ref } from 'vue'
 import router from '@/router'
 import { useAuthStore, type User } from '@/stores/auth'
@@ -27,15 +23,14 @@ async function tryLogin(userData: User) {
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixin' as *;
-@use '@/assets/scss/function' as *;
+
 @use '@/assets/scss/variables' as *;
 
-.login__wrapper {
-  @include wrapper(block);
-}
-
 .login__form {
+  border-radius: 2rem;
+  background-color: $white;
+  padding: 2rem;
   margin: 0 auto;
-  max-width: 50%;
+  max-width: calc(50% + 2rem);
 }
 </style>

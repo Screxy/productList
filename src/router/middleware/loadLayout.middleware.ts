@@ -10,7 +10,7 @@ export async function loadLayoutMiddleware(
   const fileNameWithoutExtension = fileName.split('.vue')[0]
 
   const component = await import(
-    `../../layouts/${fileNameWithoutExtension}.vue`
+    `/src/layouts/${fileNameWithoutExtension}.vue`
   )
   route.meta.layoutComponent = component.default
 }

@@ -30,14 +30,13 @@ function updateInput(event: any) {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/scss/function' as *;
 @use '@/assets/scss/variables' as *;
 @use '@/assets/scss/mixin' as *;
 
 .label__input {
   font-size: 1.2rem;
   width: 100%;
-  border: 2px solid color(primaryTitleColor);
+  border: 2px solid $c-brand;
   padding: 10px 15px;
   margin-top: 0.5rem;
 
@@ -47,6 +46,8 @@ function updateInput(event: any) {
 }
 
 .label__span {
-  @include secondTitle();
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: $c-title;
 }
 </style>

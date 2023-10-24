@@ -1,4 +1,3 @@
-@use 'function' as *;
 @use 'variables' as *;
 
 @mixin wrapper($display: flex, $maxwidth: 37rem) {
@@ -24,7 +23,7 @@
 @mixin title() {
   font-size: 2.4rem;
   font-weight: 700;
-  color: color(primaryTitleColor);
+  color: $c-brand;
   text-align: center;
   @include media(min, sm) {
     font-size: 3rem;
@@ -40,7 +39,7 @@
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 1.6rem;
-  color: color(subtitleColor);
+  color: $c-accent;
   @include media(min, sm) {
     font-size: 2rem;
   }
@@ -53,35 +52,35 @@
 @mixin secondTitle() {
   font-weight: 600;
   font-size: 1.6rem;
-  color: color(secondTitleColor);
+  color: $c-title;
 }
 
 @mixin desc() {
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 2.5rem;
-  color: color(primaryDescColor);
+  color: $c-secondTextColor;
 }
 @mixin footerTitle() {
   font-weight: 600;
   font-size: 2rem;
   line-height: 3.5rem;
-  color: color(secondDescColor);
+  color: $c-primaryTextColor;
 }
 @mixin footerText() {
   font-weight: 600;
   font-size: 1.6rem;
   line-height: 2.4rem;
-  color: color(footerTextColor);
+  color: $c-secondTextColor;
   &:hover {
-    color: color(primaryTitleColor);
+    color: $c-brand;
   }
 }
 @mixin footerCopy() {
   font-weight: 600;
   font-size: 1.6rem;
   line-height: 2.4rem;
-  color: color(footerTextColor);
+  color: $c-secondTextColor;
 }
 @mixin media($minmax, $media) {
   @each $size, $resolution in $sizes {

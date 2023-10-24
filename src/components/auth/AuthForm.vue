@@ -26,7 +26,10 @@
       :key="error.$uid"
       >{{ error.$message }}.
     </span>
-    <VButton class="form__button">Войти</VButton>
+    <div class="form__bottom">
+      <VButton class="form__button">Войти</VButton>
+      <RouterLink class="form__link" to="/signup">Нет аккаунта?</RouterLink>
+    </div>
   </form>
 </template>
 
@@ -71,6 +74,7 @@ async function onSubmitForm() {
 </script>
 
 <style scoped lang="scss">
+@use '@/assets/scss/mixin' as *;
 .form {
   display: flex;
   flex-direction: column;
@@ -83,9 +87,17 @@ async function onSubmitForm() {
 .form__error {
   color: red;
 }
-
+.form__bottom {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form__link {
+  @include subTitle();
+  text-decoration: none;
+}
 .form__button {
-  margin-top: 15px;
   align-self: flex-end;
 }
 </style>

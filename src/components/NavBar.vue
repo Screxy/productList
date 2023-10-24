@@ -64,90 +64,90 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, watch, onMounted, onUnmounted } from 'vue'
-  import { useAuthStore } from '@/stores/auth'
-  import router from '@/router'
-  const store = useAuthStore()
-  async function tryLogout() {
-    const error = await store.logout()
-    if (!error) router.push('login')
-  }
-  const screenWidth = ref(window.innerWidth)
-  const burgerVisible = ref(false)
-  const desktop = ref(false)
-  function handleResize() {
-    screenWidth.value > 768
-      ? ((desktop.value = true), (burgerVisible.value = true))
-      : ((desktop.value = false), (burgerVisible.value = false))
-    screenWidth.value = window.innerWidth
-  }
-  function toogleMenu() {
-    burgerVisible.value = !burgerVisible.value
-  }
-  function isDesktop() {
-    screenWidth.value > 768
-      ? ((desktop.value = true), (burgerVisible.value = true))
-      : ((desktop.value = false), (burgerVisible.value = false))
-  }
+import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import router from '@/router'
+const store = useAuthStore()
+async function tryLogout() {
+  const error = await store.logout()
+  if (!error) router.push('login')
+}
+const screenWidth = ref(window.innerWidth)
+const burgerVisible = ref(false)
+const desktop = ref(false)
+function handleResize() {
+  screenWidth.value > 768
+    ? ((desktop.value = true), (burgerVisible.value = true))
+    : ((desktop.value = false), (burgerVisible.value = false))
+  screenWidth.value = window.innerWidth
+}
+function toogleMenu() {
+  burgerVisible.value = !burgerVisible.value
+}
+function isDesktop() {
+  screenWidth.value > 768
+    ? ((desktop.value = true), (burgerVisible.value = true))
+    : ((desktop.value = false), (burgerVisible.value = false))
+}
 
-  watch(screenWidth, isDesktop)
-  onMounted(() => {
-    screenWidth.value > 768 ? (desktop.value = true) : (desktop.value = false)
-    window.addEventListener('resize', handleResize)
-  })
+watch(screenWidth, isDesktop)
+onMounted(() => {
+  screenWidth.value > 768 ? (desktop.value = true) : (desktop.value = false)
+  window.addEventListener('resize', handleResize)
+})
 
-  onUnmounted(() => {
-    window.removeEventListener('resize', handleResize)
-  })
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style lang="scss" scoped>
-  @use '@/assets/scss/mixin' as *;
-  @use '@/assets/scss/function' as *;
-  @use '@/assets/scss/variables' as *;
+@use '@/assets/scss/mixin' as *;
 
-  .navigation__button {
+@use '@/assets/scss/variables' as *;
+
+.navigation__button {
+  border: none;
+  background-color: transparent;
+}
+
+.navigation {
+  position: relative;
+}
+
+.navigation__list {
+  position: absolute;
+  left: 0;
+  margin-top: 1rem;
+  padding: 2rem;
+  border: solid 0.1rem rgba(0, 0, 0, 0.329);
+  border-radius: 2rem;
+  z-index: 1;
+  background-color: #ffffff62;
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+
+  @include media(min, md) {
+    display: flex;
+    position: static;
+    margin-top: 0;
+    padding: 0;
     border: none;
-    background-color: transparent;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
   }
+}
 
-  .navigation {
-    position: relative;
-  }
+.navigation__link {
+  @include subTitle();
+  text-decoration: none;
+  transition: all 0.3s;
 
-  .navigation__list {
-    position: absolute;
-    left: 0;
-    margin-top: 1rem;
-    padding: 2rem;
-    border: solid 0.1rem rgba(0, 0, 0, 0.329);
-    border-radius: 2rem;
-    z-index: 1;
-    background-color: #ffffff62;
-    backdrop-filter: blur(1rem);
-    -webkit-backdrop-filter: blur(1rem);
-
-    @include media(min, md) {
-      display: flex;
-      position: static;
-      margin-top: 0;
-      padding: 0;
-      border: none;
-      justify-content: space-around;
-      align-items: center;
-      height: auto;
+  @include media(min, md) {
+    &:hover {
+      color: $c-brand;
     }
   }
-
-  .navigation__link {
-    @include subTitle();
-    text-decoration: none;
-    transition: all 0.3s;
-
-    @include media(min, md) {
-      &:hover {
-        color: color(primaryTitleColor);
-      }
-    }
-  }
+}
 </style>

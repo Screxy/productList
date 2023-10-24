@@ -44,8 +44,8 @@
         <router-link to="/" class="navigation__link">Главная</router-link>
       </li>
       <li class="navigation__item">
-        <router-link to="/About" class="navigation__link"
-          >О проекте</router-link
+        <router-link to="/profile" class="navigation__link"
+          >Профиль</router-link
         >
       </li>
       <li class="navigation__item" v-if="!store.isAuthenticated">

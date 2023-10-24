@@ -17,12 +17,12 @@ const router = createRouter({
       },
     },
     {
-      path: '/about',
-      name: RouteNamesEnum.about,
+      path: '/profile',
+      name: RouteNamesEnum.profile,
       meta: {
         auth: true,
       },
-      component: () => import('../views/AboutView.vue'),
+      component: () => import('../views/ProfileView.vue'),
     },
     {
       path: '/login',

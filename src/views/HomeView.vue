@@ -44,7 +44,7 @@
           Купленные
         </VButton>
       </nav>
-      <VInput class="products__search" label="Поиск" v-model="search" />
+      <VInput class="products__search" label="Поиск" placeholder="Название продукта" v-model="search" />
       <ProductList :filter="filter" />
     </div>
   </section>

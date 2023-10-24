@@ -8,10 +8,10 @@ import AuthForm from '@/components/auth/AuthForm.vue'
 import Spinner from '@/components/Spinner.vue'
 import { ref } from 'vue'
 import router from '@/router'
-import { useAuthStore, type User } from '@/stores/auth'
+import { useAuthStore, type IUser } from '@/stores/auth'
 const loading = ref(false)
 const store = useAuthStore()
-async function tryLogin(userData: User) {
+async function tryLogin(userData: IUser) {
   loading.value = true
   const { data, error } = await store.login(userData)
   loading.value = false

@@ -1,17 +1,19 @@
 import { ref, onMounted } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '@/main'
-export type User = {
+import type { User } from '@supabase/gotrue-js/src/lib/types'
+import type { Session } from '@supabase/supabase-js'
+export interface IUser {
   email: string
   password: string
 }
-export type NewUser = User & {
+export interface INewUser extends IUser {
   name: string
 }
 export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = ref(false)
-  const currentUser = ref({})
-  const currentSession = ref({})
+  const currentUser = ref<User|null>(null)
+  const currentSession = ref<Session | null>(null)
   async function authCheck() {
     const { data, error } = await supabase.auth.getSession()
     if (data.session) {
@@ -23,7 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
     return (isAuthenticated.value = false)
   }
   authCheck()
-  async function login(userData: User) {
+  async function login(userData: IUser) {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: userData.email,
       password: userData.password,
@@ -33,7 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
     if (data.session) currentSession.value = data.session
     return { data, error }
   }
-  async function signUp(newUserData: NewUser) {
+  async function signUp(newUserData: INewUser) {
     const { data, error } = await supabase.auth.signUp({
       email: newUserData.email,
       password: newUserData.password,
@@ -50,8 +52,8 @@ export const useAuthStore = defineStore('auth', () => {
     const { error } = await supabase.auth.signOut()
     if (!error) {
       isAuthenticated.value = false
-      currentUser.value = {}
-      currentSession.value = {}
+      currentUser.value = null
+      currentSession.value = null
     }
     console.log(error)
 

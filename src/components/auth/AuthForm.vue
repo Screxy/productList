@@ -37,9 +37,9 @@
 import { reactive, computed } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import { helpers, required, minLength, email } from '@vuelidate/validators'
-import type { User } from '@/stores/auth'
+import type { IUser } from '@/stores/auth'
 const emit = defineEmits(['submitForm'])
-const formData = reactive<User>({
+const formData = reactive<IUser>({
   email: '',
   password: '',
 })

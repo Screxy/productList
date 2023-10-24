@@ -7,11 +7,11 @@
 import Spinner from '@/components/Spinner.vue'
 import SignUpForm from '@/components/auth/SignUpForm.vue'
 import { ref } from 'vue'
-import { useAuthStore, type NewUser } from '@/stores/auth'
+import { useAuthStore, type INewUser } from '@/stores/auth'
 import router from '@/router'
 const store = useAuthStore()
 const loading = ref(false)
-async function trySignUp(newUserData: NewUser) {
+async function trySignUp(newUserData: INewUser) {
   loading.value = true
 
   const { data, error } = await store.signUp(newUserData)

@@ -67,7 +67,7 @@ import {
   sameAs,
 } from '@vuelidate/validators'
 const emit = defineEmits(['submitForm'])
-import type { NewUser } from '@/stores/auth'
+import type { INewUser } from '@/stores/auth'
 const formData = reactive({
   name: '',
   email: '',
@@ -116,7 +116,7 @@ async function onSubmitForm() {
   const isFormCorrect = await v$.value.$validate()
   if (isFormCorrect) {
     console.log(formData)
-    const newUserData: NewUser = {
+    const newUserData: INewUser = {
       name: formData.name,
       email: formData.email,
       password: formData.password,

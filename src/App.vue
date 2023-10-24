@@ -1,13 +1,12 @@
+<template>
+  <AppLayout>
+    <RouterView />
+  </AppLayout>
+</template>
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import TheHeader from './components/TheHeader.vue'
+import AppLayout from '@/layouts/AppLayout.vue'
 </script>
-
-<template>
-  <TheHeader />
-  <RouterView />
-</template>
-
 <style lang="scss">
 html,
 body,

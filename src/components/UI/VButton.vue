@@ -26,7 +26,7 @@ defineOptions({
     padding: 15px;
   }
   &:hover {
-    box-shadow: 0px 0px 7px 3px #757575;
+    box-shadow: 0px 0px 0px 3px #ff4800;
   }
   &:active {
     background-color: #00aaff;

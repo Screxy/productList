@@ -1,7 +1,7 @@
 <template>
   <section class="login">
     <div class="login__wrapper">
-      <p v-if="loading">загрузка</p>
+      <Spinner v-if="loading">загрузка</Spinner>
       <AuthForm @submit-form="tryLogin" class="login__form" />
     </div>
   </section>
@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
 import AuthForm from '@/components/auth/AuthForm.vue'
+import Spinner from '@/components/Spinner.vue';
 import { ref } from 'vue'
 import router from '@/router'
 import { useAuthStore, type User } from '@/stores/auth'
@@ -18,8 +19,8 @@ async function tryLogin(userData: User) {
   loading.value = true
   const { data, error } = await store.login(userData)
   loading.value = false
-  console.log(data)
-  console.log(error)
+  // console.log(data)
+  // console.log(error)
   if (store.isAuthenticated) router.push('/')
 }
 </script>

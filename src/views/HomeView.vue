@@ -10,11 +10,16 @@
       <p class="products__text" v-else-if="filter === 'purchased'">
         Количество купленных товаров: {{ purchasedProducts.length }}
       </p>
-      <VButton class="products__button" @click="showDialog">
+      <VButton
+        v-if="authStore.isAuthenticated"
+        class="products__button"
+        @click="showDialog"
+      >
         Добавить продукт
       </VButton>
       <VDialog v-model:show="dialogVisible">
         <ProductForm
+          class="products__form"
           @submit-form="
             (product) => {
               store.addProduct(product)
@@ -49,10 +54,12 @@ import VDialog from '@/components/UI/VDialog.vue'
 import ProductForm from '@/components/products/ProductForm.vue'
 import ProductList from '@/components/products/ProductList.vue'
 import { useProductStore } from '@/stores/products'
+import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 
 const dialogVisible = ref(false)
+const authStore = useAuthStore()
 const store = useProductStore()
 const { products, purchasedProducts } = storeToRefs(store)
 function showDialog() {

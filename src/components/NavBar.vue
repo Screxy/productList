@@ -144,7 +144,7 @@
     text-decoration: none;
     transition: all 0.3s;
 
-    @include media(min, xl) {
+    @include media(min, md) {
       &:hover {
         color: color(primaryTitleColor);
       }

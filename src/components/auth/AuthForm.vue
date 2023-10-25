@@ -68,6 +68,8 @@ const v$ = useVuelidate(rules, formData)
 async function onSubmitForm() {
   const isFormCorrect = await v$.value.$validate()
   if (isFormCorrect) {
+    formData.password = ''
+    v$.value.$reset()
     emit('submitForm', formData)
   }
 }

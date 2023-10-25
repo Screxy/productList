@@ -44,13 +44,20 @@
           Купленные
         </VButton>
       </nav>
-      <VInput class="products__search" label="Поиск" placeholder="Название продукта" v-model="search" />
+      <VInput
+        class="products__search"
+        label="Поиск"
+        placeholder="Название продукта"
+        v-model="search"
+      />
+      <Spinner fullscreen v-if="store.loading" />
       <ProductList :filter="filter" />
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
+import Spinner from '@/components/Spinner.vue'
 import VDialog from '@/components/UI/VDialog.vue'
 import ProductForm from '@/components/products/ProductForm.vue'
 import ProductList from '@/components/products/ProductList.vue'

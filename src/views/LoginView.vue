@@ -1,22 +1,39 @@
 <template>
-  <Spinner v-if="loading">загрузка</Spinner>
+  <Spinner fullscreen v-if="loading">загрузка</Spinner>
   <AuthForm @submit-form="tryLogin" class="login__form" />
+  <Toast
+    @close="errorMessage = ''"
+    :visible="toastVisible"
+    :message="errorMessage"
+    error
+  />
 </template>
 
 <script setup lang="ts">
 import AuthForm from '@/components/auth/AuthForm.vue'
 import Spinner from '@/components/Spinner.vue'
-import { ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import router from '@/router'
 import { useAuthStore, type IUser } from '@/stores/auth'
+import { AuthError } from '@supabase/supabase-js'
+import Toast from '@/components/UI/Toast.vue'
 const loading = ref(false)
 const store = useAuthStore()
+
+const errorMessage = ref<string>('')
+const toastVisible = computed(() => {
+  return errorMessage.value ? true : false
+})
+
+watch(errorMessage, () => setTimeout(() => (errorMessage.value = ''), 3000))
+
 async function tryLogin(userData: IUser) {
   loading.value = true
   const { data, error } = await store.login(userData)
+  if (error) {
+    errorMessage.value = error.message
+  }
   loading.value = false
-  // console.log(data)
-  // console.log(error)
   if (store.isAuthenticated) router.push('/')
 }
 </script>
@@ -31,6 +48,5 @@ async function tryLogin(userData: IUser) {
   background-color: $white;
   padding: 2rem;
   margin: 0 auto;
-  max-width: calc(50% + 2rem);
 }
 </style>

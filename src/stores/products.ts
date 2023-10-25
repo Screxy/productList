@@ -12,6 +12,7 @@ export type Product = {
 }
 export const useProductStore = defineStore('product', () => {
   const products = ref<Product[]>([])
+  const loading = ref<boolean>(false)
   // const productsInLocalStorage = localStorage.getItem('products')
   // if (productsInLocalStorage) {
   //   products.value = JSON.parse(productsInLocalStorage)
@@ -132,6 +133,7 @@ export const useProductStore = defineStore('product', () => {
   }
   async function fetchProducts() {
     try {
+      loading.value = true
       const { data: product, error } = await supabase
         .from('product')
         .select('*')
@@ -143,6 +145,7 @@ export const useProductStore = defineStore('product', () => {
     } catch (error) {
       console.error(error)
     }
+    loading.value = false
   }
   // watch(
   //   products,
@@ -164,5 +167,6 @@ export const useProductStore = defineStore('product', () => {
     decrementProductCount,
     updateProduct,
     updateProductInfo,
+    loading
   }
 })

@@ -138,13 +138,22 @@ onUnmounted(() => {
     height: auto;
   }
 }
-
+.navigation__item {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  @include media(min, md) {
+    display: block;
+    margin-top: 0;
+  }
+}
 .navigation__link {
   @include subTitle();
   text-decoration: none;
   transition: all 0.3s;
 
   @include media(min, md) {
+    margin-top: 0;
     &:hover {
       color: $c-brand;
     }

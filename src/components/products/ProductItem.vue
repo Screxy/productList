@@ -45,18 +45,18 @@
       >
         <EditIcon class="item__svg" />
       </VButton>
-      <p class="item__time">
-        {{
-          new Intl.DateTimeFormat('ru', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-          }).format(new Date(product.created_at))
-        }}
-      </p>
     </div>
+    <p class="item__time">
+      {{
+        new Intl.DateTimeFormat('ru', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+        }).format(new Date(product.created_at))
+      }}
+    </p>
     <ProductForm
       @submit-form="updateProduct"
       v-if="formVisible"
@@ -110,15 +110,23 @@ const store = useProductStore()
   display: flex;
   flex-wrap: wrap;
   word-break: normal;
-
   p + p {
     margin-left: 3rem;
+    @include media(min, xs) {
+      margin-left: 3rem;
+    }
+  }
+  .item__count {
+    margin-left: auto;
+        @include media(min, sm) {
+      margin-left: 3rem;
+    }
   }
 }
 
 .item__name {
   @include secondTitle();
-  max-width: 50%;
+  // max-width: 50%;
   word-break: break-all;
   font-size: 2rem;
 }
@@ -133,19 +141,29 @@ const store = useProductStore()
 
 .item__time {
   @include secondTitle();
+  margin-top: 1rem;
   display: flex;
-  align-items: center;
   justify-content: end;
+  align-items: center;
   width: 100%;
+  @include media(min, sm){
+    margin-top: 0;
+  }
 }
 
 .item__buttons {
   display: flex;
+  justify-content: space-between;
+  @include media(min, sm) {
+    justify-content: start;
+  }
   margin-top: 1.5rem;
 }
 
 .item__button + .item__button {
-  margin-left: 2rem;
+  @include media(min, sm) {
+    margin-left: 2rem;
+  }
 }
 
 .item__cart-button {

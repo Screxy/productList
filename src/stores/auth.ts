@@ -2,7 +2,7 @@ import { ref, onMounted } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '@/main'
 import type { User } from '@supabase/gotrue-js/src/lib/types'
-import type { Session } from '@supabase/supabase-js'
+import type { AuthError, Session } from '@supabase/supabase-js'
 export interface IUser {
   email: string
   password: string
@@ -12,7 +12,7 @@ export interface INewUser extends IUser {
 }
 export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = ref(false)
-  const currentUser = ref<User|null>(null)
+  const currentUser = ref<User | null>(null)
   const currentSession = ref<Session | null>(null)
   async function authCheck() {
     const { data, error } = await supabase.auth.getSession()

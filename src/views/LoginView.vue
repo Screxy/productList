@@ -30,6 +30,8 @@ watch(errorMessage, () => setTimeout(() => (errorMessage.value = ''), 3000))
 async function tryLogin(userData: IUser) {
   loading.value = true
   const { data, error } = await store.login(userData)
+  console.log(userData);
+  
   if (error) {
     errorMessage.value = error.message
   }

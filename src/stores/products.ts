@@ -90,6 +90,9 @@ export const useProductStore = defineStore('product', () => {
     const { data, error } = await updateProductInfo(
       products.value[indexToUpdate]
     )
+    if (!error && data) {
+      products.value[indexToUpdate] = data[0]
+    }
     console.log(data, error)
   }
   async function updateProductInfo(product: Product) {
@@ -167,6 +170,6 @@ export const useProductStore = defineStore('product', () => {
     decrementProductCount,
     updateProduct,
     updateProductInfo,
-    loading
+    loading,
   }
 })

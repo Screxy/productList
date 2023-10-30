@@ -21,10 +21,11 @@ export const useAuthStore = defineStore('auth', () => {
       currentSession.value = data.session
     }
     if (error) console.log(error)
-    if (data.session != null) return (isAuthenticated.value = true)
-    return (isAuthenticated.value = false)
+    if (data.session != null) {
+      isAuthenticated.value = true
+    } else isAuthenticated.value = false
+    return isAuthenticated.value
   }
-  authCheck()
   async function login(userData: IUser) {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: userData.email,

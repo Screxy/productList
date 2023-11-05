@@ -5,6 +5,7 @@
       class="form__input"
       placeholder="Имя"
       label="Введите имя"
+      autocomplete="given-name"
     />
     <span class="form__error" v-for="error in v$.name.$errors" :key="error.$uid"
       >{{ error.$message }}.
@@ -14,6 +15,7 @@
       class="form__input"
       placeholder="Email"
       label="Введите Email"
+      autocomplete="email"
     />
     <span
       class="form__error"
@@ -27,7 +29,7 @@
       class="form__input"
       placeholder="Пароль"
       label="Введите пароль"
-      autocomplete="on"
+      autocomplete="new-password"
     />
     <span
       class="form__error"
@@ -50,7 +52,7 @@
       >{{ error.$message }}.
     </span>
     <div class="form__bottom">
-      <VButton class="form__button" >Зарегестрироваться</VButton>
+      <VButton class="form__button">Зарегестрироваться</VButton>
       <RouterLink class="form__link" to="/login">Есть аккаунт?</RouterLink>
     </div>
   </form>
@@ -128,6 +130,7 @@ async function onSubmitForm() {
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixin' as *;
+@use '@/assets/scss/variables' as *;
 .form {
   display: flex;
   flex-direction: column;
@@ -147,8 +150,12 @@ async function onSubmitForm() {
   align-items: center;
 }
 .form__link {
-  @include subTitle();
+  @include desc();
+  color: $c-accent;
   text-decoration: none;
+  &:hover{
+    color: $c-brand;
+  }
 }
 .form__button {
   align-self: flex-end;

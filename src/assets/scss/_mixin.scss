@@ -43,7 +43,8 @@
   @include media(min, sm) {
     font-size: 2rem;
   }
-  @media (min-width: 1200px) {
+  @include media(min, xl) {
+    font-size: 2rem;
     font-size: 2.2rem;
     line-height: 4.4rem;
   }

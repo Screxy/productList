@@ -1,12 +1,15 @@
 <template>
-  <Spinner fullscreen v-if="loading">загрузка</Spinner>
-  <AuthForm @submit-form="tryLogin" class="login__form" />
-  <Toast
-    @close="errorMessage = ''"
-    :visible="toastVisible"
-    :message="errorMessage"
-    error
-  />
+  <Spinner fullscreen v-if="loading" />
+  <div class="login">
+    <h1 class="login__title">Авторизоваться</h1>
+    <AuthForm @submit-form="tryLogin" class="login__form" />
+    <Toast
+      @close="errorMessage = ''"
+      :visible="toastVisible"
+      :message="errorMessage"
+      error
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,8 +33,6 @@ watch(errorMessage, () => setTimeout(() => (errorMessage.value = ''), 3000))
 async function tryLogin(userData: IUser) {
   loading.value = true
   const { data, error } = await store.login(userData)
-  console.log(userData);
-  
   if (error) {
     errorMessage.value = error.message
   }
@@ -44,11 +45,13 @@ async function tryLogin(userData: IUser) {
 @use '@/assets/scss/mixin' as *;
 
 @use '@/assets/scss/variables' as *;
-
-.login__form {
+.login{
   border-radius: 2rem;
   background-color: $white;
   padding: 2rem;
   margin: 0 auto;
+}
+.login__title{
+  @include title();
 }
 </style>

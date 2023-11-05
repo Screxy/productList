@@ -13,4 +13,5 @@ export enum RouteNamesEnum {
   profile = 'profile',
   login = 'login',
   signup = 'signup',
+  resetpassword = 'resetpassword',
 }

@@ -1,6 +1,9 @@
 <template>
   <Spinner v-if="loading">загрузка</Spinner>
-  <SignUpForm class="login__form" @submit-form="trySignUp" />
+  <div class="signup">
+    <h1 class="signup__title">Зарегистрироваться</h1>
+    <SignUpForm class="signup__form" @submit-form="trySignUp" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -26,11 +29,13 @@ async function trySignUp(newUserData: INewUser) {
 
 @use '@/assets/scss/variables' as *;
 
-.login__form {
+.signup {
   border-radius: 2rem;
   background-color: $white;
   padding: 2rem;
   margin: 0 auto;
-  max-width: calc(50% + 2rem);
+}
+.signup__title {
+  @include title();
 }
 </style>

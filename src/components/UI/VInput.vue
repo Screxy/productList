@@ -9,7 +9,7 @@
       class="label__input"
       :type="type"
       :placeholder="placeholder"
-      autocomplete="off"
+      :autocomplete="autocomplete"
     />
   </label>
 </template>
@@ -22,6 +22,7 @@ const props = defineProps<{
   modelValue: string | number
   label: string
   type?: string
+  autocomplete?: string
 }>()
 const emit = defineEmits(['update:modelValue'])
 function updateInput(event: any) {

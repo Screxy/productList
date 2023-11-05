@@ -5,6 +5,7 @@
       class="form__input"
       placeholder="Email"
       label="Введите Email"
+      autocomplete="email"
     />
     <span
       class="form__error"
@@ -18,7 +19,7 @@
       class="form__input"
       placeholder="Пароль"
       label="Введите пароль"
-      autocomplete="on"
+      autocomplete="current-password"
     />
     <span
       class="form__error"
@@ -28,6 +29,9 @@
     </span>
     <div class="form__bottom">
       <VButton class="form__button">Войти</VButton>
+      <RouterLink class="form__link" to="/resetpassword"
+        >Забыли пароль?</RouterLink
+      >
       <RouterLink class="form__link" to="/signup">Нет аккаунта?</RouterLink>
     </div>
   </form>
@@ -77,6 +81,7 @@ async function onSubmitForm() {
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixin' as *;
+@use '@/assets/scss/variables' as *;
 .form {
   display: flex;
   flex-direction: column;
@@ -91,15 +96,19 @@ async function onSubmitForm() {
 }
 .form__bottom {
   margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.form__link {
-  @include subTitle();
-  text-decoration: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .form__button {
-  align-self: flex-end;
+  grid-column: 1/3;
+}
+.form__link {
+  @include desc();
+  margin-top: 1rem;
+  color: $c-accent;
+  text-decoration: none;
+  &:hover {
+    color: $c-brand;
+  }
 }
 </style>

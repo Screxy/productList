@@ -73,8 +73,8 @@ async function tryLogout() {
   if (!error) router.push('login')
 }
 const screenWidth = ref(window.innerWidth)
-const burgerVisible = ref(false)
-const desktop = ref(false)
+const burgerVisible = ref<boolean>(false)
+const desktop = ref<boolean>(false)
 function handleResize() {
   screenWidth.value > 768
     ? ((desktop.value = true), (burgerVisible.value = true))

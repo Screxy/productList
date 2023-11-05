@@ -40,6 +40,14 @@ const router = createRouter({
       },
       component: () => import('../views/SignUpView.vue'),
     },
+    {
+      path: '/resetpassword',
+      name: RouteNamesEnum.resetpassword,
+      meta: {
+        layout: AppLayoutsEnum.login,
+      },
+      component: () => import('../views/ResetPasswordView.vue'),
+    },
   ],
 })
 router.beforeEach(loadLayoutMiddleware)

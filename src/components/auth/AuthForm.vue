@@ -1,47 +1,42 @@
 <template>
   <form class="form" @submit.prevent="onSubmitForm">
     <VInput
-      v-model.trim="formData.email"
-      class="form__input"
-      placeholder="Email"
-      label="Введите Email"
-      autocomplete="email"
+        v-model.trim="formData.email"
+        class="form__input"
+        placeholder="Email"
+        label="Введите Email"
+        autocomplete="email"
     />
     <span
-      class="form__error"
-      v-for="error in v$.email.$errors"
-      :key="error.$uid"
-      >{{ error.$message }}.
+        class="form__error"
+        v-for="error in v$.email.$errors"
+        :key="error.$uid"
+    >{{ error.$message }}.
     </span>
     <VInput
-      v-model="formData.password"
-      type="password"
-      class="form__input"
-      placeholder="Пароль"
-      label="Введите пароль"
-      autocomplete="current-password"
+        v-model="formData.password"
+        type="password"
+        class="form__input"
+        placeholder="Пароль"
+        label="Введите пароль"
+        autocomplete="current-password"
     />
     <span
-      class="form__error"
-      v-for="error in v$.password.$errors"
-      :key="error.$uid"
-      >{{ error.$message }}.
+        class="form__error"
+        v-for="error in v$.password.$errors"
+        :key="error.$uid"
+    >{{ error.$message }}.
     </span>
-    <div class="form__bottom">
-      <VButton class="form__button">Войти</VButton>
-      <RouterLink class="form__link" to="/resetpassword"
-        >Забыли пароль?</RouterLink
-      >
-      <RouterLink class="form__link" to="/signup">Нет аккаунта?</RouterLink>
-    </div>
+    <VButton class="form__button">Войти</VButton>
   </form>
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import {reactive, computed} from 'vue'
 import useVuelidate from '@vuelidate/core'
-import { helpers, required, minLength, email } from '@vuelidate/validators'
-import type { IUser } from '@/stores/auth'
+import {helpers, required, minLength, email} from '@vuelidate/validators'
+import type {IUser} from '@/stores/auth'
+
 const emit = defineEmits(['submitForm'])
 const formData = reactive<IUser>({
   email: '',
@@ -51,24 +46,25 @@ const rules = computed(() => {
   return {
     email: {
       required: helpers.withMessage(
-        'Поле обязательное для заполнения',
-        required
+          'Поле обязательное для заполнения',
+          required
       ),
       email: helpers.withMessage('Введите валидный email', email),
     },
     password: {
       required: helpers.withMessage(
-        'Поле обязательное для заполнения',
-        required
+          'Поле обязательное для заполнения',
+          required
       ),
       minLength: helpers.withMessage(
-        `Минимальная длина пароля ${minLength(6).$params.min}`,
-        minLength(6)
+          `Минимальная длина пароля ${minLength(6).$params.min}`,
+          minLength(6)
       ),
     },
   }
 })
 const v$ = useVuelidate(rules, formData)
+
 async function onSubmitForm() {
   const isFormCorrect = await v$.value.$validate()
   if (isFormCorrect) {
@@ -82,6 +78,7 @@ async function onSubmitForm() {
 <style scoped lang="scss">
 @use '@/assets/scss/mixin' as *;
 @use '@/assets/scss/variables' as *;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -94,19 +91,17 @@ async function onSubmitForm() {
 .form__error {
   color: red;
 }
-.form__bottom {
-  margin-top: 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
+
 .form__button {
-  grid-column: 1/3;
+  margin-top: 1.5rem;
 }
+
 .form__link {
   @include desc();
   margin-top: 1rem;
   color: $c-accent;
   text-decoration: none;
+
   &:hover {
     color: $c-brand;
   }

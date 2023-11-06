@@ -1,65 +1,62 @@
 <template>
   <form class="form" @submit.prevent="onSubmitForm">
     <VInput
-      v-model.trim="formData.name"
-      class="form__input"
-      placeholder="Имя"
-      label="Введите имя"
-      autocomplete="given-name"
+        v-model.trim="formData.name"
+        class="form__input"
+        placeholder="Имя"
+        label="Введите имя"
+        autocomplete="given-name"
     />
     <span class="form__error" v-for="error in v$.name.$errors" :key="error.$uid"
-      >{{ error.$message }}.
+    >{{ error.$message }}.
     </span>
     <VInput
-      v-model.trim="formData.email"
-      class="form__input"
-      placeholder="Email"
-      label="Введите Email"
-      autocomplete="email"
+        v-model.trim="formData.email"
+        class="form__input"
+        placeholder="Email"
+        label="Введите Email"
+        autocomplete="email"
     />
     <span
-      class="form__error"
-      v-for="error in v$.email.$errors"
-      :key="error.$uid"
-      >{{ error.$message }}.
+        class="form__error"
+        v-for="error in v$.email.$errors"
+        :key="error.$uid"
+    >{{ error.$message }}.
     </span>
     <VInput
-      v-model="formData.password"
-      type="password"
-      class="form__input"
-      placeholder="Пароль"
-      label="Введите пароль"
-      autocomplete="new-password"
+        v-model="formData.password"
+        type="password"
+        class="form__input"
+        placeholder="Пароль"
+        label="Введите пароль"
+        autocomplete="new-password"
     />
     <span
-      class="form__error"
-      v-for="error in v$.password.$errors"
-      :key="error.$uid"
-      >{{ error.$message }}.
+        class="form__error"
+        v-for="error in v$.password.$errors"
+        :key="error.$uid"
+    >{{ error.$message }}.
     </span>
     <VInput
-      v-model="formData.repeatPassword"
-      type="password"
-      class="form__input"
-      placeholder="Повторите пароль"
-      label="Повторите пароль"
-      autocomplete="off"
+        v-model="formData.repeatPassword"
+        type="password"
+        class="form__input"
+        placeholder="Повторите пароль"
+        label="Повторите пароль"
+        autocomplete="off"
     />
     <span
-      class="form__error"
-      v-for="error in v$.repeatPassword.$errors"
-      :key="error.$uid"
-      >{{ error.$message }}.
+        class="form__error"
+        v-for="error in v$.repeatPassword.$errors"
+        :key="error.$uid"
+    >{{ error.$message }}.
     </span>
-    <div class="form__bottom">
-      <VButton class="form__button">Зарегестрироваться</VButton>
-      <RouterLink class="form__link" to="/login">Есть аккаунт?</RouterLink>
-    </div>
+    <VButton class="form__button">Зарегестрироваться</VButton>
   </form>
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import {reactive, computed} from 'vue'
 import useVuelidate from '@vuelidate/core'
 import {
   helpers,
@@ -68,8 +65,10 @@ import {
   email,
   sameAs,
 } from '@vuelidate/validators'
+
 const emit = defineEmits(['submitForm'])
-import type { INewUser } from '@/stores/auth'
+import type {INewUser} from '@/stores/auth'
+
 const formData = reactive({
   name: '',
   email: '',
@@ -80,40 +79,41 @@ const rules = computed(() => {
   return {
     name: {
       required: helpers.withMessage(
-        'Поле обязательное для заполнения',
-        required
+          'Поле обязательное для заполнения',
+          required
       ),
     },
     email: {
       required: helpers.withMessage(
-        'Поле обязательное для заполнения',
-        required
+          'Поле обязательное для заполнения',
+          required
       ),
       email: helpers.withMessage('Введите валидный email', email),
     },
     password: {
       required: helpers.withMessage(
-        'Поле обязательное для заполнения',
-        required
+          'Поле обязательное для заполнения',
+          required
       ),
       minLength: helpers.withMessage(
-        `Минимальная длина пароля ${minLength(6).$params.min}`,
-        minLength(6)
+          `Минимальная длина пароля ${minLength(6).$params.min}`,
+          minLength(6)
       ),
     },
     repeatPassword: {
       required: helpers.withMessage(
-        'Поле обязательное для заполнения',
-        required
+          'Поле обязательное для заполнения',
+          required
       ),
       sameAsRef: helpers.withMessage(
-        'Пароли не совпадают',
-        sameAs(formData.password)
+          'Пароли не совпадают',
+          sameAs(formData.password)
       ),
     },
   }
 })
 const v$ = useVuelidate(rules, formData)
+
 async function onSubmitForm() {
   const isFormCorrect = await v$.value.$validate()
   if (isFormCorrect) {
@@ -131,6 +131,7 @@ async function onSubmitForm() {
 <style scoped lang="scss">
 @use '@/assets/scss/mixin' as *;
 @use '@/assets/scss/variables' as *;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -143,21 +144,25 @@ async function onSubmitForm() {
 .form__error {
   color: red;
 }
+
 .form__bottom {
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .form__link {
   @include desc();
   color: $c-accent;
   text-decoration: none;
-  &:hover{
+
+  &:hover {
     color: $c-brand;
   }
 }
+
 .form__button {
-  align-self: flex-end;
+  margin-top: 1.5rem;
 }
 </style>

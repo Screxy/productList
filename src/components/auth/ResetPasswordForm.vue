@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+import {computed, reactive} from 'vue'
 import useVuelidate from '@vuelidate/core'
 import {email, helpers, required} from '@vuelidate/validators'
 
 const emit = defineEmits(['submitForm'])
 
-const formData = ref({email: ''})
+const formData = reactive({email: ''})
 
 const rules = computed(() => {
   return {
@@ -43,7 +43,8 @@ const v$ = useVuelidate(rules, formData)
 const onSubmitForm = async () => {
   const isFormCorrect = await v$.value.$validate()
   if (isFormCorrect) {
-    emit('submitForm', formData.value.email)
+    emit('submitForm', formData.email)
+    formData.email = ''
     v$.value.$reset()
   }
 }

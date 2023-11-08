@@ -18,17 +18,15 @@
 <script setup lang="ts">
 import Toast from '@/components/UI/Toast.vue'
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm.vue'
-import {onMounted} from 'vue'
 import {useToast} from '@/hooks/useToast'
 import {supabase} from '@/main'
-import * as process from 'process'
 
 const {errorMessage, toastVisible} = useToast()
 const resetPassword = async (email: string) => {
   const {data, error} = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${import.meta.env.VITE_BASE_URL}/profile/edit`,
   })
-  console.log(data, error)
+
 }
 </script>
 

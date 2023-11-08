@@ -62,7 +62,7 @@ async function onSubmitForm() {
   const isFormCorrect = await v$.value.$validate()
   if (isFormCorrect) {
     const password = formData.password
-    // emit('submitForm', password)
+    emit('submitForm', password)
     formData.password = ''
     formData.repeatPassword = ''
     v$.value.$reset()

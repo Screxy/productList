@@ -1,9 +1,9 @@
 <template>
-  <div class="toast" :class="{ 'toast--error': error }" v-if="visible">
+  <div class="toast" :class="{ 'toast--error': error }" v-if="store.toastVisible">
     <p class="toast__message">
-      {{ message in messages ? messages[message] : 'Неизвестная ошибка' }}
+      {{ store.errorMessage in messages ? messages[message] : 'Неизвестная ошибка' }}
     </p>
-    <VButton class="toast__button" @click="$emit('close')">
+    <VButton class="toast__button" @click="store.clearErrorMessage()">
       <IconClose class="toast__svg"/>
     </VButton>
   </div>
@@ -12,6 +12,8 @@
 <script setup lang="ts">
 import messages from '@/supabase/messages'
 import IconClose from '@/components/icons/IconClose.vue'
+import {useAuthStore} from '@/stores/auth'
+import {watch} from 'vue'
 
 const emit = defineEmits(['close'])
 const props = defineProps<{
@@ -19,6 +21,7 @@ const props = defineProps<{
   error?: boolean
   visible: boolean
 }>()
+const store = useAuthStore()
 </script>
 
 <style scoped lang="scss">

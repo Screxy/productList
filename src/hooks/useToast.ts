@@ -6,6 +6,6 @@ export function useToast() {
         return errorMessage.value ? true : false
     })
 
-    // watch(errorMessage, () => setTimeout(() => (errorMessage.value = ''), 3000))
+    watch(errorMessage, () => setTimeout(() => (errorMessage.value = ''), 3000))
     return {errorMessage, toastVisible}
 }

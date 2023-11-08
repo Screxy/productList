@@ -28,16 +28,12 @@ import router from '@/router'
 import {useAuthStore, type IUser} from '@/stores/auth'
 import {AuthError} from '@supabase/supabase-js'
 import Toast from '@/components/UI/Toast.vue'
+import {useToast} from '@/hooks/useToast'
 
 const loading = ref(false)
 const store = useAuthStore()
 
-const errorMessage = ref<string>('')
-const toastVisible = computed(() => {
-  return errorMessage.value ? true : false
-})
-
-watch(errorMessage, () => setTimeout(() => (errorMessage.value = ''), 3000))
+const {errorMessage, toastVisible} = useToast()
 
 async function tryLogin(userData: IUser) {
   loading.value = true

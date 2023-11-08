@@ -1,14 +1,18 @@
 <template>
   <div class="toast" :class="{ 'toast--error': error }" v-if="visible">
-    <VButton class="toast__button" @click="$emit('close')">x</VButton>
     <p class="toast__message">
       {{ message in messages ? messages[message] : 'Неизвестная ошибка' }}
     </p>
+    <VButton class="toast__button" @click="$emit('close')">
+      <IconClose class="toast__svg"/>
+    </VButton>
   </div>
 </template>
 
 <script setup lang="ts">
 import messages from '@/supabase/messages'
+import IconClose from '@/components/icons/IconClose.vue'
+
 const emit = defineEmits(['close'])
 const props = defineProps<{
   message: string
@@ -20,26 +24,39 @@ const props = defineProps<{
 <style scoped lang="scss">
 @use '@/assets/scss/mixin' as *;
 @use '@/assets/scss/variables' as *;
+
 .toast {
+  display: grid;
+  grid-template-columns: auto 1fr;
   position: fixed;
-  right: 3rem;
-  bottom: 3rem;
-  padding: 3rem 4rem;
+  right: 2rem;
+  bottom: 2rem;
+  max-width: 30rem;
+  padding: 1rem 2rem;
   border-radius: 1rem;
   background-color: $second-body-bg;
 }
+
 .toast__button {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.2rem;
+  display: flex;
+  margin-left: auto;
+  max-width: 2.5rem;
+  aspect-ratio: 1/1;
+  padding: 0.5rem;
 }
+
+.toast__svg {
+  width: 2.4rem;
+}
+
 .toast--error {
   background-color: $c-error;
+
   .toast__message {
     color: $white;
   }
 }
+
 .toast__message {
   @include desc();
   color: $black;

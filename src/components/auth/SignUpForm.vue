@@ -117,7 +117,6 @@ const v$ = useVuelidate(rules, formData)
 async function onSubmitForm() {
   const isFormCorrect = await v$.value.$validate()
   if (isFormCorrect) {
-    console.log(formData)
     const newUserData: INewUser = {
       name: formData.name,
       email: formData.email,

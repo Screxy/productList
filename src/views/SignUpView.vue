@@ -5,6 +5,12 @@
     <SignUpForm class="signup__form" @submit-form="trySignUp"/>
     <RouterLink class="signup__link" to="/login">Есть аккаунт?</RouterLink>
   </div>
+  <Toast
+      @close="errorMessage = ''"
+      :visible="toastVisible"
+      :message="errorMessage"
+      error
+  />
 </template>
 
 <script setup lang="ts">
@@ -13,15 +19,22 @@ import SignUpForm from '@/components/auth/SignUpForm.vue'
 import {ref} from 'vue'
 import {useAuthStore, type INewUser} from '@/stores/auth'
 import router from '@/router'
+import {useToast} from '@/hooks/useToast'
+import Toast from '@/components/UI/Toast.vue'
 
 const store = useAuthStore()
 const loading = ref(false)
+
+const {errorMessage, toastVisible} = useToast()
 
 async function trySignUp(newUserData: INewUser) {
   loading.value = true
 
   const {data, error} = await store.signUp(newUserData)
-  console.log(data, error)
+  console.log(error?.message)
+  if (error) {
+    errorMessage.value = error.message
+  }
   loading.value = false
   if (store.isAuthenticated) router.push('/')
 }

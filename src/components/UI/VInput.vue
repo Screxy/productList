@@ -4,12 +4,13 @@
       {{ label }}
     </span>
     <input
-      :value="modelValue"
-      @input="updateInput"
-      class="label__input"
-      :type="type"
-      :placeholder="placeholder"
-      :autocomplete="autocomplete"
+        :value="modelValue"
+        @input="updateInput"
+        class="label__input"
+        :type="type"
+        :placeholder="placeholder"
+        :autocomplete="autocomplete"
+        :disabled="disabled"
     />
   </label>
 </template>
@@ -23,8 +24,10 @@ const props = defineProps<{
   label: string
   type?: string
   autocomplete?: string
+  disabled?: boolean
 }>()
 const emit = defineEmits(['update:modelValue'])
+
 function updateInput(event: any) {
   emit('update:modelValue', event.target.value)
 }
@@ -33,15 +36,22 @@ function updateInput(event: any) {
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
 @use '@/assets/scss/mixin' as *;
-.label{
+
+.label {
   display: block;
   height: 100%;
 }
+
 .label__input {
   font-size: 1.2rem;
   width: 100%;
   border: 2px solid $c-brand;
   padding: 10px 15px;
+
+  &[disabled] {
+    border: 2px solid transparent;
+  }
+
   &:focus {
     box-shadow: 0px 0px 7px 3px #757575;
   }

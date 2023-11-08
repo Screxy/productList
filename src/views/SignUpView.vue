@@ -1,5 +1,5 @@
 <template>
-  <Spinner v-if="loading">загрузка</Spinner>
+  <Spinner v-if="loading"/>
   <div class="signup">
     <h1 class="signup__title">Зарегистрироваться</h1>
     <SignUpForm class="signup__form" @submit-form="trySignUp"/>

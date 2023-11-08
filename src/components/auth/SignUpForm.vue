@@ -123,6 +123,7 @@ async function onSubmitForm() {
       password: formData.password,
     }
     emit('submitForm', newUserData)
+    v$.value.$reset()
   }
 }
 </script>
@@ -142,23 +143,6 @@ async function onSubmitForm() {
 
 .form__error {
   color: red;
-}
-
-.form__bottom {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.form__link {
-  @include desc();
-  color: $c-accent;
-  text-decoration: none;
-
-  &:hover {
-    color: $c-brand;
-  }
 }
 
 .form__button {

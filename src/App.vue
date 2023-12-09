@@ -1,10 +1,10 @@
 <template>
   <AppLayout>
-    <RouterView />
+    <RouterView/>
   </AppLayout>
 </template>
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
 import AppLayout from '@/layouts/AppLayout.vue'
 </script>
 <style lang="scss">
@@ -105,6 +105,7 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
 img,
 object,
 embed {
@@ -150,10 +151,12 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 th {
   font-weight: bold;
   vertical-align: bottom;
 }
+
 td {
   font-weight: normal;
   vertical-align: top;
@@ -183,12 +186,15 @@ pre {
 input[type='radio'] {
   vertical-align: text-bottom;
 }
+
 input[type='checkbox'] {
   vertical-align: bottom;
 }
+
 .ie7 input[type='checkbox'] {
   vertical-align: baseline;
 }
+
 .ie6 input {
   vertical-align: text-bottom;
 }
@@ -201,7 +207,6 @@ textarea {
 
 table {
   font-size: inherit;
-  font: 100%;
 }
 
 small {
@@ -216,15 +221,18 @@ td,
 td img {
   vertical-align: top;
 }
+
 sub,
 sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
 }
+
 sup {
   top: -0.5em;
 }
+
 sub {
   bottom: -0.25em;
 }
@@ -261,6 +269,7 @@ input[type='button'] {
 .ie7 img {
   -ms-interpolation-mode: bicubic;
 }
+
 .clearfix:before,
 .clearfix:after {
   content: '\0020';
@@ -268,29 +277,33 @@ input[type='button'] {
   height: 0;
   overflow: hidden;
 }
+
 .clearfix:after {
   clear: both;
 }
+
 .clearfix {
   zoom: 1;
 }
+
 html {
   font-size: 62.5%;
 }
+
 body {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
 }
+
 @font-face {
   font-family: 'Open Sans';
   src: url('@/assets/fonts/OpenSans-Bold.eot');
-  src: url('@/assets/fonts/OpenSans-Bold.eot?#iefix')
-      format('embedded-opentype'),
-    url('@/assets/fonts/OpenSans-Bold.woff2') format('woff2'),
-    url('@/assets/fonts/OpenSans-Bold.woff') format('woff'),
-    url('@/assets/fonts/OpenSans-Bold.ttf') format('truetype'),
-    url('@/assets/fonts/OpenSans-Bold.svg#OpenSans-Bold') format('svg');
+  src: url('@/assets/fonts/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+  url('@/assets/fonts/OpenSans-Bold.woff2') format('woff2'),
+  url('@/assets/fonts/OpenSans-Bold.woff') format('woff'),
+  url('@/assets/fonts/OpenSans-Bold.ttf') format('truetype'),
+  url('@/assets/fonts/OpenSans-Bold.svg#OpenSans-Bold') format('svg');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -299,12 +312,11 @@ body {
 @font-face {
   font-family: 'Open Sans';
   src: url('@/assets/fonts/OpenSans-SemiBold.eot');
-  src: url('@/assets/fonts/OpenSans-SemiBold.eot?#iefix')
-      format('embedded-opentype'),
-    url('@/assets/fonts/OpenSans-SemiBold.woff2') format('woff2'),
-    url('@/assets/fonts/OpenSans-SemiBold.woff') format('woff'),
-    url('@/assets/fonts/OpenSans-SemiBold.ttf') format('truetype'),
-    url('@/assets/fonts/OpenSans-SemiBold.svg#OpenSans-SemiBold') format('svg');
+  src: url('@/assets/fonts/OpenSans-SemiBold.eot?#iefix') format('embedded-opentype'),
+  url('@/assets/fonts/OpenSans-SemiBold.woff2') format('woff2'),
+  url('@/assets/fonts/OpenSans-SemiBold.woff') format('woff'),
+  url('@/assets/fonts/OpenSans-SemiBold.ttf') format('truetype'),
+  url('@/assets/fonts/OpenSans-SemiBold.svg#OpenSans-SemiBold') format('svg');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -313,16 +325,16 @@ body {
 @font-face {
   font-family: 'Open Sans';
   src: url('@/assets/fonts/OpenSans-Regular.eot');
-  src: url('@/assets/fonts/OpenSans-Regular.eot?#iefix')
-      format('embedded-opentype'),
-    url('@/assets/fonts/OpenSans-Regular.woff2') format('woff2'),
-    url('@/assets/fonts/OpenSans-Regular.woff') format('woff'),
-    url('@/assets/fonts/OpenSans-Regular.ttf') format('truetype'),
-    url('@/assets/fonts/OpenSans-Regular.svg#OpenSans-Regular') format('svg');
+  src: url('@/assets/fonts/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+  url('@/assets/fonts/OpenSans-Regular.woff2') format('woff2'),
+  url('@/assets/fonts/OpenSans-Regular.woff') format('woff'),
+  url('@/assets/fonts/OpenSans-Regular.ttf') format('truetype'),
+  url('@/assets/fonts/OpenSans-Regular.svg#OpenSans-Regular') format('svg');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
+
 .visually-hidden {
   position: absolute;
   width: 1px;

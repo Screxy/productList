@@ -51,7 +51,7 @@
         :key="error.$uid"
     >{{ error.$message }}.
     </span>
-    <VButton class="form__button">Зарегестрироваться</VButton>
+    <VButton class="form__button">Зарегистрироваться</VButton>
   </form>
 </template>
 
@@ -68,6 +68,8 @@ import {
 
 const emit = defineEmits(['submitForm'])
 import type {INewUser} from '@/stores/auth'
+import VButton from '@/components/UI/VButton.vue'
+import VInput from '@/components/UI/VInput.vue'
 
 const formData = reactive({
   name: '',

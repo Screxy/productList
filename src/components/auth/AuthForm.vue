@@ -36,6 +36,8 @@ import {reactive, computed} from 'vue'
 import useVuelidate from '@vuelidate/core'
 import {helpers, required, minLength, email} from '@vuelidate/validators'
 import type {IUser} from '@/stores/auth'
+import VInput from '@/components/UI/VInput.vue'
+import VButton from '@/components/UI/VButton.vue'
 
 const emit = defineEmits(['submitForm'])
 const formData = reactive<IUser>({
@@ -94,16 +96,5 @@ async function onSubmitForm() {
 
 .form__button {
   margin-top: 1.5rem;
-}
-
-.form__link {
-  @include desc();
-  margin-top: 1rem;
-  color: $c-accent;
-  text-decoration: none;
-
-  &:hover {
-    color: $c-brand;
-  }
 }
 </style>

@@ -14,6 +14,7 @@ import messages from '@/supabase/messages'
 import IconClose from '@/components/icons/IconClose.vue'
 import {useAuthStore} from '@/stores/auth'
 import {watch} from 'vue'
+import VButton from '@/components/UI/VButton.vue'
 
 const emit = defineEmits(['close'])
 const props = defineProps<{

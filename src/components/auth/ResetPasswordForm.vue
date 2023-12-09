@@ -21,6 +21,8 @@
 import {computed, reactive} from 'vue'
 import useVuelidate from '@vuelidate/core'
 import {email, helpers, required} from '@vuelidate/validators'
+import VButton from '@/components/UI/VButton.vue'
+import VInput from '@/components/UI/VInput.vue'
 
 const emit = defineEmits(['submitForm'])
 

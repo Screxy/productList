@@ -11,16 +11,16 @@
         Количество купленных товаров: {{ purchasedProducts.length }}
       </p>
       <VButton
-        v-if="authStore.isAuthenticated"
-        class="products__button"
-        @click="showDialog"
+          v-if="authStore.isAuthenticated"
+          class="products__button"
+          @click="showDialog"
       >
         Добавить продукт
       </VButton>
       <VDialog v-model:show="dialogVisible">
         <ProductForm
-          class="products__form"
-          @submit-form="
+            class="products__form"
+            @submit-form="
             (product) => {
               store.addProduct(product)
               dialogVisible = false
@@ -30,28 +30,28 @@
       </VDialog>
       <nav class="products__filter">
         <VButton
-          class="products__filter-button"
-          @click="filter = 'all'"
-          :class="{ 'products__filter-button_checked': filter === 'all' }"
+            class="products__filter-button"
+            @click="filter = 'all'"
+            :class="{ 'products__filter-button_checked': filter === 'all' }"
         >
           Все
         </VButton>
         <VButton
-          class="products__filter-button"
-          @click="filter = 'purchased'"
-          :class="{ 'products__filter-button_checked': filter === 'purchased' }"
+            class="products__filter-button"
+            @click="filter = 'purchased'"
+            :class="{ 'products__filter-button_checked': filter === 'purchased' }"
         >
           Купленные
         </VButton>
       </nav>
       <VInput
-        class="products__search"
-        label="Поиск"
-        placeholder="Название продукта"
-        v-model="search"
+          class="products__search"
+          label="Поиск"
+          placeholder="Название продукта"
+          v-model="search"
       />
-      <Spinner fullscreen v-if="store.loading" />
-      <ProductList :filter="filter" />
+      <Spinner fullscreen v-if="store.loading"/>
+      <ProductList :filter="filter"/>
     </div>
   </section>
 </template>
@@ -61,18 +61,21 @@ import Spinner from '@/components/Spinner.vue'
 import VDialog from '@/components/UI/VDialog.vue'
 import ProductForm from '@/components/products/ProductForm.vue'
 import ProductList from '@/components/products/ProductList.vue'
-import { computed, ref } from 'vue'
-import { useProductStore } from '@/stores/products'
-import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
+import {computed, ref} from 'vue'
+import {useProductStore} from '@/stores/products'
+import {useAuthStore} from '@/stores/auth'
+import {storeToRefs} from 'pinia'
+import VInput from '@/components/UI/VInput.vue'
+import VButton from '@/components/UI/VButton.vue'
 
 const authStore = useAuthStore()
 const store = useProductStore()
-const { products, purchasedProducts, search, searchProducts } =
-  storeToRefs(store)
+const {products, purchasedProducts, search, searchProducts} =
+    storeToRefs(store)
 store.fetchProducts()
 
 const dialogVisible = ref(false)
+
 function showDialog() {
   dialogVisible.value = true
 }

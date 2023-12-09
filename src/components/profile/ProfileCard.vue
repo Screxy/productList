@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img src="../../assets/defualtavatar.svg" alt="" class="card__avatar"/>
+    <img src="@/assets/defualtavatar.svg" alt="Аватар" class="card__avatar"/>
     <p class="card__name">Имя: {{ name }}</p>
     <p class="card__email">Электронная почта: {{ email }}</p>
     <VButton class="card__button" @click="()=>$router.push('/profile/edit')" v-if="$route.fullPath === '/profile'">
@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import VButton from '@/components/UI/VButton.vue'
+
 const props = defineProps<{
   name: string,
   email: string

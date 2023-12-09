@@ -24,18 +24,23 @@ defineOptions({
   @include media(min, md) {
     padding: 15px;
   }
+
   &:hover {
-    box-shadow: 0px 0px 0px 3px #ff4800;
+    box-shadow: 0 0 0 3px #ff4800;
   }
+
   &:active {
     background-color: #00aaff;
   }
+
   &[disabled] {
     transform: scale(0.9);
     opacity: 0.5;
+
     &:hover {
       box-shadow: none;
     }
+
     &:active {
       background-color: $c-brand;
     }

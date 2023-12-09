@@ -1,8 +1,8 @@
 <template>
   <nav class="navigation">
-    <button class="navigation__button" @click="toogleMenu" v-if="!desktop">
+    <button class="navigation__button" @click="toggleMenu" v-if="!desktop">
       <svg
-          class="navigationbar__burger"
+          class="navigation__burger"
           width="20"
           height="27"
           viewBox="0 0 20 27"
@@ -38,7 +38,7 @@
     <ul
         class="navigation__list"
         v-show="burgerVisible || desktop"
-        @click="toogleMenu"
+        @click="toggleMenu"
     >
       <li class="navigation__item">
         <router-link to="/" class="navigation__link">Главная</router-link>
@@ -54,7 +54,7 @@
       </li>
       <li class="navigation__item" v-if="!store.isAuthenticated">
         <router-link to="/signup" class="navigation__link"
-        >Зарегестрироваться
+        >Зарегистрироваться
         </router-link
         >
       </li>
@@ -69,6 +69,7 @@
 import {ref, watch, onMounted, onUnmounted} from 'vue'
 import {useAuthStore} from '@/stores/auth'
 import router from '@/router'
+import VButton from '@/components/UI/VButton.vue'
 
 const store = useAuthStore()
 
@@ -88,7 +89,7 @@ function handleResize() {
   screenWidth.value = window.innerWidth
 }
 
-function toogleMenu() {
+function toggleMenu() {
   burgerVisible.value = !burgerVisible.value
 }
 

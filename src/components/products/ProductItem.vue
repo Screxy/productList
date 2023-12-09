@@ -9,41 +9,41 @@
     </div>
     <div class="item__buttons" v-if="authStore.isAuthenticated">
       <VButton
-        :disabled="formVisible"
-        class="item__button"
-        @click="store.incrementProductCount(product.id)"
+          :disabled="formVisible"
+          class="item__button"
+          @click="store.incrementProductCount(product.id)"
       >
         +
       </VButton>
       <VButton
-        :disabled="formVisible"
-        class="item__button"
-        @click="store.decrementProductCount(product.id)"
+          :disabled="formVisible"
+          class="item__button"
+          @click="store.decrementProductCount(product.id)"
       >
         -
       </VButton>
       <VButton
-        :disabled="formVisible"
-        class="item__button"
-        @click="store.deleteProduct(product.id)"
+          :disabled="formVisible"
+          class="item__button"
+          @click="store.deleteProduct(product.id)"
       >
         Удалить
       </VButton>
       <VButton
-        :disabled="formVisible"
-        class="item__button item__cart-button"
-        @click="store.togglePurchased(product.id)"
+          :disabled="formVisible"
+          class="item__button item__cart-button"
+          @click="store.togglePurchased(product.id)"
       >
         <PurchasedIcon
-          class="item__svg"
-          :class="{ item__svg_active: product.purchased }"
+            class="item__svg"
+            :class="{ item__svg_active: product.purchased }"
         />
       </VButton>
       <VButton
-        class="item__button item__cart-button"
-        @click="formVisible = !formVisible"
+          class="item__button item__cart-button"
+          @click="formVisible = !formVisible"
       >
-        <EditIcon class="item__svg" />
+        <EditIcon class="item__svg"/>
       </VButton>
     </div>
     <p class="item__time">
@@ -58,26 +58,29 @@
       }}
     </p>
     <ProductForm
-      @submit-form="updateProduct"
-      v-if="formVisible"
-      :name="product.name"
-      :count="product.count"
-      :price="product.price"
+        @submit-form="updateProduct"
+        v-if="formVisible"
+        :name="product.name"
+        :count="product.count"
+        :price="product.price"
     />
   </li>
 </template>
 
 <script lang="ts" setup>
-import type { Product } from '@/stores/products'
-import { useProductStore } from '@/stores/products'
+import type {Product} from '@/stores/products'
+import {useProductStore} from '@/stores/products'
 import ProductForm from '@/components/products/ProductForm.vue'
 import PurchasedIcon from './icons/PurchasedIcon.vue'
 import EditIcon from './icons/EditIcon.vue'
-import { ref } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import {ref} from 'vue'
+import {useAuthStore} from '@/stores/auth'
+import VButton from '@/components/UI/VButton.vue'
+
 const authStore = useAuthStore()
 const props = defineProps<{ product: Product }>()
 const formVisible = ref(false)
+
 function updateProduct(newProduct: Omit<Product, 'id' | 'purchased'>) {
   formVisible.value = !formVisible.value
   const editedProduct: Product = {
@@ -90,6 +93,7 @@ function updateProduct(newProduct: Omit<Product, 'id' | 'purchased'>) {
   }
   store.updateProduct(editedProduct)
 }
+
 const store = useProductStore()
 </script>
 
@@ -110,15 +114,17 @@ const store = useProductStore()
   display: flex;
   flex-wrap: wrap;
   word-break: normal;
+
   p + p {
     margin-left: 3rem;
     @include media(min, xs) {
       margin-left: 3rem;
     }
   }
+
   .item__count {
     margin-left: auto;
-        @include media(min, sm) {
+    @include media(min, sm) {
       margin-left: 3rem;
     }
   }
@@ -146,7 +152,7 @@ const store = useProductStore()
   justify-content: end;
   align-items: center;
   width: 100%;
-  @include media(min, sm){
+  @include media(min, sm) {
     margin-top: 0;
   }
 }

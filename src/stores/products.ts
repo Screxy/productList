@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue'
+import {ref, computed, watch} from 'vue'
 import {defineStore} from 'pinia'
 import {supabase} from '@/main'
 
@@ -12,8 +12,12 @@ export type Product = {
 }
 export const useProductStore = defineStore('product', () => {
     const products = ref<Product[]>([])
+    const page = ref(0)
+    const totalProducts = ref(0)
     const loading = ref<boolean>(false)
-
+    watch(page, async (newPage) => {
+        await fetchProducts(newPage)
+    })
     const purchasedProducts = computed(() =>
         searchProducts.value.filter((product) => product.purchased)
     )
@@ -110,39 +114,27 @@ export const useProductStore = defineStore('product', () => {
         )
     }
 
-    async function fetchProducts(page = 1) {
+    async function fetchProducts(page = 0) {
         try {
             loading.value = true
             const {from, to} = getPagination(page, 3)
-            const {data: product, error} = await supabase
+            console.log(page)
+            console.log(from, to)
+            const {data: product, error, count} = await supabase
                 .from('product')
                 .select('*', {count: 'exact'})
                 .order('id', {ascending: true})
                 .range(from, to)
             if (error) throw new Error(error.message)
             if (product) {
+                console.log(product)
                 products.value = product
+                totalProducts.value = count as number
             }
         } catch (error) {
             console.error(error)
-        }
-        loading.value = false
-    }
-
-    async function getServerSideProps({query: {page = 1}}) {
-        const {from, to} = getPagination(page, 3)
-        const {data: product, count} = await supabase
-            .from('product')
-            .select('*', {count: 'exact'})
-            .order('id', {ascending: true})
-            .range(from, to)
-
-        return {
-            props: {
-                data: product,
-                count: count,
-                page: +page,
-            },
+        } finally {
+            loading.value = false
         }
     }
 
@@ -153,13 +145,7 @@ export const useProductStore = defineStore('product', () => {
 
         return {from, to}
     }
-    // watch(
-    //   products,
-    //   (state: Product[]) => {
-    //     localStorage.setItem('products', JSON.stringify(state))
-    //   },
-    //   { deep: true }
-    // )
+
     return {
         products,
         search,
@@ -173,6 +159,8 @@ export const useProductStore = defineStore('product', () => {
         decrementProductCount,
         updateProduct,
         updateProductInfo,
+        totalProducts,
+        page,
         loading,
     }
 })

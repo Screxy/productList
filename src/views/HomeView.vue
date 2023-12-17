@@ -51,6 +51,9 @@
           v-model="search"
       />
       <Spinner fullscreen v-if="store.loading"/>
+      <VButton @click="store.page--" :disabled="store.page===0"> &lt;</VButton>
+      {{ store.page + 1 }} / {{ Math.ceil(store.totalProducts / 3) }}
+      <VButton @click="store.page++" :disabled="store.page+1===Math.ceil(store.totalProducts / 3)"> ></VButton>
       <ProductList :filter="filter"/>
     </div>
   </section>
@@ -72,8 +75,6 @@ const authStore = useAuthStore()
 const store = useProductStore()
 const {products, purchasedProducts, search, searchProducts} =
     storeToRefs(store)
-store.fetchProducts()
-
 const dialogVisible = ref(false)
 
 function showDialog() {
@@ -81,6 +82,8 @@ function showDialog() {
 }
 
 const filter = ref('all')
+
+store.fetchProducts()
 </script>
 
 <style lang="scss">

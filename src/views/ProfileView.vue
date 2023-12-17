@@ -4,7 +4,7 @@
       <ProfileCard :name="Username" :email="UserEmail" class="profile__card"/>
       <router-view class="profile__card-edit">
       </router-view>
-      <Toast visible="visible" :message="message" error/>
+      <Toast :visible="visible" :message="message" error/>
     </div>
   </section>
 </template>

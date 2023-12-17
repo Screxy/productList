@@ -12,7 +12,7 @@ import router from '@/router'
 
 const store = useAuthStore()
 
-const tryResetForm = async (newPassword) => {
+const tryResetForm = async (newPassword: string) => {
   const {error, data} = await store.updatePassword(newPassword)
   console.log(error?.message)
   if (!error) await router.push('/profile')

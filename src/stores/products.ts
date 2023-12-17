@@ -1,6 +1,5 @@
-import {ref, computed, watch} from 'vue'
+import {ref, computed} from 'vue'
 import {defineStore} from 'pinia'
-import axios from 'axios'
 import {supabase} from '@/main'
 
 export type Product = {
@@ -14,38 +13,7 @@ export type Product = {
 export const useProductStore = defineStore('product', () => {
     const products = ref<Product[]>([])
     const loading = ref<boolean>(false)
-    // const productsInLocalStorage = localStorage.getItem('products')
-    // if (productsInLocalStorage) {
-    //   products.value = JSON.parse(productsInLocalStorage)
-    // }
-    // if (products.value.length === 0) {
-    //   products.value = [
-    //     {
-    //       id: 1,
-    //       price: 92,
-    //       name: 'Гречка',
-    //       count: 1,
-    //       purchased: false,
-    //       created_at: '2023-06-03T12:42:22.398Z',
-    //     },
-    //     {
-    //       id: 2,
-    //       price: 342,
-    //       name: 'Горошек',
-    //       count: 1,
-    //       purchased: false,
-    //       created_at: '2023-06-03T12:42:22.398Z',
-    //     },
-    //     {
-    //       id: 3,
-    //       price: 50,
-    //       name: 'Вода',
-    //       count: 1,
-    //       purchased: true,
-    //       created_at: '2023-06-03T12:42:22.398Z',
-    //     },
-    //   ]
-    // }
+
     const purchasedProducts = computed(() =>
         searchProducts.value.filter((product) => product.purchased)
     )

@@ -75,7 +75,7 @@ const store = useAuthStore()
 
 async function tryLogout() {
   const error = await store.logout()
-  if (!error) router.push('/login')
+  if (!error) await router.push('/login')
 }
 
 const screenWidth = ref(window.innerWidth)
@@ -83,9 +83,7 @@ const burgerVisible = ref<boolean>(false)
 const desktop = ref<boolean>(false)
 
 function handleResize() {
-  screenWidth.value > 768
-      ? ((desktop.value = true), (burgerVisible.value = true))
-      : ((desktop.value = false), (burgerVisible.value = false))
+  isDesktop()
   screenWidth.value = window.innerWidth
 }
 
@@ -93,10 +91,19 @@ function toggleMenu() {
   burgerVisible.value = !burgerVisible.value
 }
 
+const setDesktop = () => {
+  desktop.value = true
+  burgerVisible.value = true
+}
+const setMobile = () => {
+  desktop.value = false
+  burgerVisible.value = false
+}
+
 function isDesktop() {
   screenWidth.value > 768
-      ? ((desktop.value = true), (burgerVisible.value = true))
-      : ((desktop.value = false), (burgerVisible.value = false))
+      ? setDesktop()
+      : setMobile()
 }
 
 watch(screenWidth, isDesktop)

@@ -110,15 +110,17 @@ export const useProductStore = defineStore('product', () => {
         )
     }
 
-    async function fetchProducts() {
+    async function fetchProducts(page = 1) {
         try {
             loading.value = true
+            const {from, to} = getPagination(page, 3)
             const {data: product, error} = await supabase
                 .from('product')
-                .select('*')
+                .select('*', {count: 'exact'})
+                .order('id', {ascending: true})
+                .range(from, to)
             if (error) throw new Error(error.message)
             if (product) {
-                product.sort((a, b) => a.id - b.id)
                 products.value = product
             }
         } catch (error) {
@@ -127,6 +129,30 @@ export const useProductStore = defineStore('product', () => {
         loading.value = false
     }
 
+    async function getServerSideProps({query: {page = 1}}) {
+        const {from, to} = getPagination(page, 3)
+        const {data: product, count} = await supabase
+            .from('product')
+            .select('*', {count: 'exact'})
+            .order('id', {ascending: true})
+            .range(from, to)
+
+        return {
+            props: {
+                data: product,
+                count: count,
+                page: +page,
+            },
+        }
+    }
+
+    const getPagination = (page: number, size: number) => {
+        const limit = size ? +size : 3
+        const from = page ? page * limit : 0
+        const to = page ? from + size - 1 : size - 1
+
+        return {from, to}
+    }
     // watch(
     //   products,
     //   (state: Product[]) => {
